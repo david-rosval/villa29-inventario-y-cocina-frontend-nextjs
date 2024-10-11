@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { authenticate } from "@/lib/auth/actions"
 
 function LoginForm() {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -26,8 +27,7 @@ function LoginForm() {
   })
 
   function onSubmit(values: z.infer<typeof loginSchema>) {
-    // TODO: enviar values al backend para autenticación
-    console.log(values)
+    authenticate(values)
   }
 
   return (

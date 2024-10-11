@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
 import Orden from './OrdenCocina'
-import type { Orden as OrdenType } from '@/sample'
+import type { Orden as OrdenType } from '@/lib/types/pedidos'
 
 function CocinaOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
-  const [filtro, setFiltro] = useState('')
+  const [filtro, setFiltro] = useState('Todos')
   return (
     <div className='p-8'>
       {/* Contenido superior */}
@@ -31,13 +31,13 @@ function CocinaOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
         {filtro === 'Todos' ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
             {ordenes.sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (
-              <Orden key={index} orden={orden} />
+              <Orden key={index} orden={orden} i={index} />
             ))}
           </div>
         ) : (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
             {ordenes.filter(orden => orden.estado === filtro).sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (
-              <Orden key={index} orden={orden} />
+              <Orden key={index} orden={orden} i={index} />
             ))}
           </div>
         )}

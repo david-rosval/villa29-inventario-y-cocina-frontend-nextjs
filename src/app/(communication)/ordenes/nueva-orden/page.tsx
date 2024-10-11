@@ -4,24 +4,65 @@
 import Menu from "@/components/ordenes/Menu"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { generateCurentDate } from "@/lib/utils"
+import { fixPrice, obtenerFechaHoraLima } from "@/lib/utils"
 import { PlusIcon, MinusIcon } from "@radix-ui/react-icons"
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import type { Item } from '@/lib/types/pedidos'
+import { useRouter } from "next/navigation"
 
-type Item = {
-  id: number
-  nombre: string
-  precioUnit: number
-  cantidad: number
-}
+
 
 export default function NuevaOrden() {
+  const router = useRouter()
   const nuevoIdOrden = 99
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [menu, setMenu] = useState<Array<any>>([])
+
+  const [tiempo, setTiempo] = useState(obtenerFechaHoraLima())
   
   const [ordenList, setOrdenList] = useState<Item[]>([])
+  
+  useEffect(() => {
+    async function fetchMenu() {
+      try {
+        const response = await axios.get('/api/menu')
+        setMenu(response.data)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error:any) {
+        console.log(error.response)
+      }
+    }
+    fetchMenu()
+    return
+  }, [])
+  
+  useEffect(() => {
+    return setTiempo(obtenerFechaHoraLima())
+  }, [ordenList])
 
-  const handleEnviarACocina = () => {
-    console.log('Enviar a cocina', ordenList)
+  const handleEnviarACocina = async () => {
+    const orden = {
+      fecha: obtenerFechaHoraLima()[0],
+      horaAsignado: obtenerFechaHoraLima()[1],
+      pedidos: ordenList.map(orden => { 
+        const pedido = {
+          menuItem: orden._id,
+          cantidad: orden.cantidad
+        }
+        return pedido
+      }),
+      precioTotal: ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0)
+    }
+    try {
+      const response = await axios.post('/api/pedidos', orden)
+      console.log(response.data)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error:any) {
+      console.log(error.response)
+    } 
+    router.push('/ordenes')
   }
 
   return (
@@ -30,7 +71,7 @@ export default function NuevaOrden() {
       <div className="bg-secondary lg:max-w-[600px] w-full p-3 flex flex-col pb-8">
         <div className="flex justify-between text-xl font-semibold border-b-2 border-primary pb-2">
           <p>Orden: #{nuevoIdOrden}</p>
-          <p>Fecha: {generateCurentDate()}</p>
+          <p>Fecha: {tiempo[0]}</p>
         </div>
         {/* Items */}
         <div className="h-full">
@@ -57,12 +98,12 @@ export default function NuevaOrden() {
                 <p>Descuentos:</p>
               </div>
               <div>
-                <p>S/.{ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0)}</p>
+                <p>S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
                 <p>S/.{0}</p>
               </div>
             </div>
             <div className="w-1/2 text-2xl font-bold uppercase text-right">
-              <p>Total: S/.{ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0)}</p>
+              <p>Total: S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
             </div>
           </div>
           <div className="flex justify-between gap-6">
@@ -73,7 +114,7 @@ export default function NuevaOrden() {
         </div>
       </div>
       {/* Menú */}
-      <Menu ordenList={ordenList} setOrdenList={setOrdenList} />
+      <Menu ordenList={ordenList} setOrdenList={setOrdenList} menu={menu} />
       
     </div>
   ) 
@@ -134,7 +175,7 @@ function OrdenItem({item, ordenList, setOrdenList}: {item: Item, ordenList: Item
         </Button>
       </div>
       <p className="w-full">S/.{item.precioUnit}</p>
-      <p className="w-full font-semibold">S/.{item.cantidad * item.precioUnit}</p>
+      <p className="w-full font-semibold">S/.{fixPrice(item.cantidad * item.precioUnit)}</p>
     </div>
   )
 }

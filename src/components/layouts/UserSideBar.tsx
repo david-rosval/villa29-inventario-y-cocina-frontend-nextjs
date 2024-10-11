@@ -5,10 +5,12 @@ import { Button } from "../ui/button"
 import { HomeIcon, ListBulletIcon, ExitIcon } from "@radix-ui/react-icons"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
+import { logout } from "@/lib/auth/actions"
 
 
 function UserSideBar() {
   const pathname = usePathname()
+
   return (
     <div className="bg-primary h-full text-secondary w-60 pr-3 pt-5 ">
       <div className="w-full flex justify-center">
@@ -48,6 +50,7 @@ function UserSideBar() {
         <Button 
           variant="outline"
           className={`bg-primary text-secondary w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14 hover:bg-primary hover:text-secondary`}
+          onClick={() => logout()}
         >
           <ExitIcon className="h-5 w-5" />
           <p className="text-lg">Cerrar sesión</p>

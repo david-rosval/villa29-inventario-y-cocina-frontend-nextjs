@@ -1,20 +1,14 @@
 "use client"
 
-import { menu } from "@/sample"
 import { Button } from "../ui/button"
 import { useState } from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
-
-type Item = {
-  id: number
-  nombre: string
-  precioUnit: number
-  cantidad: number
-}
+import type { Item } from '@/lib/types/pedidos'
 
 type MenuItem = {
+  _id: string
   id: number
   nombre: string
   precio: number
@@ -22,13 +16,12 @@ type MenuItem = {
   img: string
 }
 
-export default function Menu({ordenList, setOrdenList}: { ordenList: Item[], setOrdenList: (value: Item[]) => void }) {
-
+export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[], setOrdenList: (value: Item[]) => void, menu: MenuItem[] }) {
+ 
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('')
 
-
-  const categoriasDuplicados = menu.map(item => item.categoria)
-  const categorias = categoriasDuplicados.filter((item, index) => categoriasDuplicados.indexOf(item) === index);
+  const categoriasDuplicados = menu?.map(item => item.categoria)
+  const categorias = categoriasDuplicados?.filter((item, index) => categoriasDuplicados.indexOf(item) === index);
 
 
   const handleAddItemButton = (item: MenuItem) => {
@@ -46,6 +39,7 @@ export default function Menu({ordenList, setOrdenList}: { ordenList: Item[], set
       return
     }
     setOrdenList([...ordenList, {
+      _id: item._id,
       id: item.id,
       nombre: item.nombre,
       precioUnit: item.precio,
@@ -58,7 +52,7 @@ export default function Menu({ordenList, setOrdenList}: { ordenList: Item[], set
       {/* categorías */}
       <div className="flex justify-between gap-2 pb-3 border-b-2 border-primary">
         <ScrollArea className="w-full h-14 whitespace-nowrap">
-          {categorias.map((categoria, i) => (
+          {categorias?.map((categoria, i) => (
             <Button 
               key={i} 
               onClick={() => setCategoriaSeleccionada(categoria)} 
@@ -74,7 +68,7 @@ export default function Menu({ordenList, setOrdenList}: { ordenList: Item[], set
       <ScrollArea className="w-full h-[calc(100vh-210px)]">
         {!categoriaSeleccionada ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-8 bg-local '>
-          {menu.map((item, i) => (
+          {menu?.map((item, i) => (
             <MenuItemCard key={i} item={item} handleFunction={handleAddItemButton} />
           ))}
         </div>
@@ -93,17 +87,18 @@ export default function Menu({ordenList, setOrdenList}: { ordenList: Item[], set
 function MenuItemCard({ item, handleFunction }: { item: MenuItem, handleFunction: (item: MenuItem) => void }) {
   return (
     <div className="bg-transparent flex justify-center">
-      <div className="bg-secondary shadow-lg ">
+      <div className="bg-secondary shadow-lg w-[200px]">
         
-        <div className="relative h-48 w-48 overflow-hidden">
+        <div className="relative h-[200px] w-[200px] flex justify-center items-center overflow-hidden">
           <Image 
-            src={'/logo-restobar.jpg'} 
-            alt="Producto" 
+            src={item ? `https://raw.githubusercontent.com/david-rosval/villa29-images-menu/refs/heads/main/${item.img}` : '/logo-restobar.jpg'} 
+            alt={item? item.img : 'villa29'} 
             fill
+
           />
         </div>
         <div className="flex justify-between items-center px-3 py-2">
-          <p>{item.nombre}</p>
+          <p className="text-lg font-semibold text-wrap">{item.nombre}</p>
           
           <Button variant="outline" size="icon" onClick={() => handleFunction(item)} className="rounded-full">
               <PlusIcon className="h-6 w-6" />

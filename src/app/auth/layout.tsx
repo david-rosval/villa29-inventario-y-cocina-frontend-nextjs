@@ -30,7 +30,7 @@ export default function AuthLayout({
           <Image 
             src="/logo-restobar.jpg" 
             alt="Logo" 
-            fill
+            fill={true}
           />
         </div>
         <Card className="w-[450px] mb-10 pt-8 pb-10 px-14">

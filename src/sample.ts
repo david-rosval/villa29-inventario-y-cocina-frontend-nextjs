@@ -111,101 +111,206 @@ export const ordenes: Orden[] = [
 export const menu = [
   {
     id: 1,
-    nombre: 'Hamburguesa 1',
-    precio: 14,
-    categoria: 'Hamburguesas'
-    ,img: 'imagen'
+    nombre: "Clásica",
+    precio: 10.90,
+    categoria: "Hamburguesas",
+    img: "clasica.webp"
   },
   {
     id: 2,
-    nombre: 'Hamburguesa 2',
-    precio: 16,
-    categoria: 'Hamburguesas',img: 'imagen'
+    nombre: "Chesse Burger",
+    precio: 12.90,
+    categoria: "Hamburguesas",
+    img: "chesse-burger.webp"
   },
   {
     id: 3,
-    nombre: 'Hamburguesa 3',
-    precio: 18,
-    categoria: 'Hamburguesas',img: 'imagen'
+    nombre: "A lo Pobre",
+    precio: 13.90,
+    categoria: "Hamburguesas",
+    img: "a-lo-pobre.webp"
   },
   {
     id: 4,
-    nombre: 'Alitas 1',
-    precio: 10,
-    categoria: 'Alitas',img: 'imagen'
+    nombre: "Crujiente",
+    precio: 13.90,
+    categoria: "Hamburguesas",
+    img: "crujiente.webp"
   },
   {
     id: 5,
-    nombre: 'Alitas 2',
-    precio: 12,
-    categoria: 'Alitas',img: 'imagen'
+    nombre: "Royal",
+    precio: 14.90,
+    categoria: "Hamburguesas",
+    img: "royal.webp"
   },
   {
     id: 6,
-    nombre: 'Alitas 3',
-    precio: 14,
-    categoria: 'Alitas',img: 'imagen'
+    nombre: "Parrillero",
+    precio: 16.90,
+    categoria: "Hamburguesas",
+    img: "parrillero.webp"
   },
   {
     id: 7,
-    nombre: 'Salchipapa 1',
-    precio: 8,
-    categoria: 'Salchipapas',img: 'imagen'
+    nombre: "Alitas BBQ",
+    precio: 16.00,
+    categoria: "Alitas",
+    img: "alitas-bbq.webp"
   },
   {
     id: 8,
-    nombre: 'Salchipapa 2',
-    precio: 10,
-    categoria: 'Salchipapas',img: 'imagen'
+    nombre: "Alitas Crujientes",
+    precio: 16.00,
+    categoria: "Alitas",
+    img: "alitas-crujientes.webp"
   },
   {
     id: 9,
-    nombre: 'Salchipapa 3',
-    precio: 12,
-    categoria: 'Salchipapas',img: 'imagen'
+    nombre: "Alitas Búfalo",
+    precio: 18.00,
+    categoria: "Alitas",
+    img: "alitas-bufalo.webp"
   },
   {
     id: 10,
-    nombre: 'Plato 1',
-    precio: 15,
-    categoria: 'Platos a la carta',img: 'imagen'
+    nombre: "Alitas Acevichadas",
+    precio: 18.00,
+    categoria: "Alitas",
+    img: "alitas-acevichadas.webp"
   },
   {
     id: 11,
-    nombre: 'Plato 2',
-    precio: 15,
-    categoria: 'Platos a la carta',img: 'imagen'
+    nombre: "Alitas a la Maracuyá",
+    precio: 17.00,
+    categoria: "Alitas",
+    img: "alitas-a-la-maracuya.webp"
   },
   {
     id: 12,
-    nombre: 'Piqueo 1',
-    precio: 12,
-    categoria: 'Piqueos',img: 'imagen'
+    nombre: "Alitas Oriental",
+    precio: 17.00,
+    categoria: "Alitas",
+    img: "alitas-oriental.webp"
   },
   {
     id: 13,
-    nombre: 'Piqueo 2',
-    precio: 10,
-    categoria: 'Piqueos',img: 'imagen'
+    nombre: "Clásica",
+    precio: 10.90,
+    categoria: "Salchipapas",
+    img: "salchipapa-clasica.webp"
+  },
+  {
+    id: 14,
+    nombre: "Mixta",
+    precio: 12.90,
+    categoria: "Salchipapas",
+    img: "salchipapa-mixta.webp"
   },
   {
     id: 15,
-    nombre: 'Cerveza 1',
-    precio: 16,
-    categoria: 'Cervezas',img: 'imagen'
+    nombre: "Sachi-Villa 29",
+    precio: 14.00,
+    categoria: "Salchipapas",
+    img: "sachi-villa-29.webp"
   },
   {
     id: 16,
-    nombre: 'Cerveza 2',
-    precio: 20,
-    categoria: 'Cervezas',img: 'imagen'
+    nombre: "Tequeños de Queso",
+    precio: 9.90,
+    categoria: "Piqueos",
+    img: "tequenos-de-queso.webp"
   },
   {
     id: 17,
-    nombre: 'Coctel 1',
-    precio: 19,
-    categoria: 'Cocteles',img: 'imagen'
+    nombre: "Trilogía 1",
+    precio: 30.00,
+    categoria: "Piqueos",
+    img: "trilogia-1.webp"
   },
-  
-
+  {
+    id: 18,
+    nombre: "Trilogía 2",
+    precio: 30.00,
+    categoria: "Piqueos",
+    img: "trilogia-2.webp"
+  },
+  {
+    id: 19,
+    nombre: "Carne de Cerdo Marinado",
+    precio: 16.00,
+    categoria: "Platos a la Carta",
+    img: "carne-de-cerdo-marinado.webp"
+  },
+  {
+    id: 20,
+    nombre: "Pollo a la Plancha",
+    precio: 16.00,
+    categoria: "Platos a la Carta",
+    img: "pollo-a-la-plancha.webp"
+  },
+  {
+    id: 21,
+    nombre: "Lomo Saltado",
+    precio: 18.00,
+    categoria: "Platos a la Carta",
+    img: "lomo-saltado.webp"
+  },
+  {
+    id: 22,
+    nombre: "Bisteck a lo Pobre",
+    precio: 18.00,
+    categoria: "Platos a la Carta",
+    img: "bisteck-a-lo-pobre.webp"
+  },
+  {
+    id: 23,
+    nombre: "Hot Dog Frankfurt",
+    precio: 2.50,
+    categoria: "Adicionales",
+    img: "hot-dog-frankfurt.webp"
+  },
+  {
+    id: 24,
+    nombre: "Huevo",
+    precio: 2.00,
+    categoria: "Adicionales",
+    img: "huevo.webp"
+  },
+  {
+    id: 25,
+    nombre: "Cabanossi",
+    precio: 1.50,
+    categoria: "Adicionales",
+    img: "cabanossi.webp"
+  },
+  {
+    id: 26,
+    nombre: "Tocino",
+    precio: 1.50,
+    categoria: "Adicionales",
+    img: "tocino.webp"
+  },
+  {
+    id: 27,
+    nombre: "Queso",
+    precio: 1.50,
+    categoria: "Adicionales",
+    img: "queso.webp"
+  },
+  {
+    id: 28,
+    nombre: "Jamón",
+    precio: 1.50,
+    categoria: "Adicionales",
+    img: "jamon.webp"
+  },
+  {
+    id: 29,
+    nombre: "La Ruleta Villa 29",
+    precio: 35.00,
+    categoria: "Juegos",
+    img: "ruleta-villa-29.webp"
+  }
 ]
+

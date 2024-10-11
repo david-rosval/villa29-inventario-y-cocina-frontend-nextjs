@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { ScrollArea } from '../ui/scroll-area'
 import Orden from './OrdenMozo'
-import type { Orden as OrdenType } from '@/sample'
+import type { Orden as OrdenType } from '@/lib/types/pedidos'
 
 function MozoOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
   return (
@@ -24,7 +24,7 @@ function MozoOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
 
       <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
         {ordenes.sort((a,b) => b.estado.localeCompare(a.estado)).map((orden, index: number) => (
-          <Orden key={index} orden={orden} />
+          <Orden key={index} orden={orden} i={index} />
         ))}
       </div>
       </ScrollArea>
