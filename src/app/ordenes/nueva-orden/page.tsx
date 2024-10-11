@@ -5,12 +5,13 @@ import Menu from "@/components/ordenes/Menu"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { fixPrice, obtenerFechaHoraLima } from "@/lib/utils"
-import { PlusIcon, MinusIcon } from "@radix-ui/react-icons"
+import { PlusIcon, MinusIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import type { Item } from '@/lib/types/pedidos'
 import { useRouter } from "next/navigation"
 import { socket } from "@/socket"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 
 
@@ -24,6 +25,8 @@ export default function NuevaOrden() {
   const [tiempo, setTiempo] = useState(obtenerFechaHoraLima())
   
   const [ordenList, setOrdenList] = useState<Item[]>([])
+
+  const [errorVacio, setErrorVacio] = useState(false)
   
   useEffect(() => {
     async function fetchMenu() {
@@ -43,6 +46,17 @@ export default function NuevaOrden() {
     return setTiempo(obtenerFechaHoraLima())
   }, [ordenList])
 
+  useEffect(() => {
+    if (errorVacio) {
+      const timeoutError = setTimeout(() => {
+        setErrorVacio(false)
+      }, 4000)
+      return () => clearTimeout(timeoutError)
+    }
+    return
+  }, [errorVacio])
+  
+
   const handleEnviarACocina = async () => {
     const orden = {
       fecha: obtenerFechaHoraLima()[0],
@@ -56,6 +70,12 @@ export default function NuevaOrden() {
       }),
       precioTotal: ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0)
     }
+
+    if (!orden.pedidos.length) {
+      setErrorVacio(true)
+      return
+    }
+
     try {
       const response = await axios.post('/api/pedidos', orden)
       console.log(response.status)
@@ -108,16 +128,23 @@ export default function NuevaOrden() {
               <p>Total: S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
             </div>
           </div>
-          <div className="flex justify-between gap-6">
-            <Button className="w-full h-10">Guardar</Button>
-            <Button className="w-full h-10">Imprimir</Button>
-            <Button onClick={handleEnviarACocina} className="w-full h-10">Enviar</Button>
+          <div className="flex justify-end gap-6">
+       
+            <Button onClick={handleEnviarACocina} className="w-44 h-10">Enviar</Button>
           </div>
         </div>
       </div>
       {/* Menú */}
       <Menu ordenList={ordenList} setOrdenList={setOrdenList} menu={menu} />
-      
+      {errorVacio && (
+        <Alert variant="destructive" className="m-5 absolute bottom-0 right-0 w-[600px] bg-secondary">
+          <ExclamationTriangleIcon  className="w-4 h-4" />
+          <AlertTitle>Orden vacía</AlertTitle>
+          <AlertDescription>
+            No has seleccionado ningún item del menú
+          </AlertDescription>
+        </Alert>
+      )}
     </div>
   ) 
 }
