@@ -28,7 +28,7 @@ export default function AuthLayout({
       <div className="z-10 flex flex-col items-center ">
         <div className="relative h-20 w-20 rounded-full overflow-hidden mb-8">
           <Image 
-            src="/logo-restobar.jpg" 
+            src='https://raw.githubusercontent.com/david-rosval/villa29-images-menu/refs/heads/main/logo-restobar.webp'
             alt="Logo" 
             fill={true}
           />

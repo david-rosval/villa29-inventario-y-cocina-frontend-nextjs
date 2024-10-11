@@ -16,7 +16,7 @@ function UserSideBar() {
       <div className="w-full flex justify-center">
         <div className="relative h-20 w-20 rounded-full overflow-hidden">
           <Image 
-            src="/logo-restobar.jpg" 
+            src="https://raw.githubusercontent.com/david-rosval/villa29-images-menu/refs/heads/main/logo-restobar.webp" 
             alt="Logo" 
             fill
           />
