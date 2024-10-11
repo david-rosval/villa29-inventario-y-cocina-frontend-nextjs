@@ -3,13 +3,19 @@
 import type { Orden } from "@/lib/types/pedidos"
 import { Button } from "../ui/button"
 import axios from "axios"
+import { socket } from "@/socket"
+import { OrdenesContext } from "./OrdenesProvider"
+import { useContext } from "react"
 
 function Orden({ orden, i }: { orden: Orden, i: number }) {
+  const { setNotificaciones } = useContext(OrdenesContext)
 
   const handleCambiarEstadoListo = async () => {
     try {
       const response = await axios.put('/api/pedidos', { id: orden._id, estado: orden.estado })
-      console.log(response.data)
+      console.log(response.status)
+      socket.emit('pedido-listo', { message: 'COCINA: pedido listo para que el mozo lo retire' })
+      setNotificaciones(prev => [...prev, 'COCINA: pedido listo para que el mozo lo retire'])
     } catch (error) {
       console.log(error)
     }

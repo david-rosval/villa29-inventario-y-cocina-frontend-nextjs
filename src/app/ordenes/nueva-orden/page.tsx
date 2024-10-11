@@ -10,6 +10,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import type { Item } from '@/lib/types/pedidos'
 import { useRouter } from "next/navigation"
+import { socket } from "@/socket"
 
 
 
@@ -57,7 +58,8 @@ export default function NuevaOrden() {
     }
     try {
       const response = await axios.post('/api/pedidos', orden)
-      console.log(response.data)
+      console.log(response.status)
+      socket.emit('asignar-pedido', { message: 'MOZO: nuevo pedido asignado a cocina' })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error:any) {
       console.log(error.response)

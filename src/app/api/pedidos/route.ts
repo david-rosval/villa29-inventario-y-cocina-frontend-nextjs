@@ -7,7 +7,7 @@ export async function GET() {
     await connectDb()
     const pedidosQuery = Pedido.find().populate('pedidos.menuItem')
     const pedidos = await pedidosQuery.exec()
-    console.log(pedidos);
+    //console.log(pedidos);
     return NextResponse.json(pedidos)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {

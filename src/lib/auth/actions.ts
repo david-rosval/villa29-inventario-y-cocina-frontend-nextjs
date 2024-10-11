@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use server"
 
 import axios, { AxiosResponse } from 'axios';
@@ -12,7 +13,7 @@ const client = axios.create({
 export async function authenticate(values: { email: string, password: string }) {
   try {
     const response: AxiosResponse = await client.post('/auth/login', values)
-    console.log(response.data)
+    //console.log(response.data)
     cookies().set('token', response.data.token)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error:any) {
@@ -37,6 +38,6 @@ export async function getUser() {
     return response.data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error:any) {
-    console.log(error.response.data)
+    console.log({ error: 'Error obteniendo perfil del usuario' })
   }
 }

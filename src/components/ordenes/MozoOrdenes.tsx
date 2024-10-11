@@ -1,16 +1,17 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from '../ui/button'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { ScrollArea } from '../ui/scroll-area'
 import Orden from './OrdenMozo'
-import type { Orden as OrdenType } from '@/lib/types/pedidos'
+import { OrdenesContext } from './OrdenesProvider'
 
-function MozoOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
+function MozoOrdenes() {
+  const { ordenes } = useContext(OrdenesContext)
   return (
     <div className='p-8 '>
       {/* Contenido superior */}
-      <div className='flex justify-between'>
+      <div className='flex justify-between mb-5'>
         <h1 className='text-3xl font-bold'>Todas las órdenes</h1>
         {/* Botón crear orden */}
         <Link href={"/ordenes/nueva-orden"}>
@@ -20,7 +21,7 @@ function MozoOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
           </Button>
         </Link>
       </div>
-      <ScrollArea className="w-full h-[calc(100vh-200px)]">
+      <ScrollArea className="w-full h-[700px]">
 
       <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
         {ordenes.sort((a,b) => b.estado.localeCompare(a.estado)).map((orden, index: number) => (

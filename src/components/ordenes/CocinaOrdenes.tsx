@@ -1,13 +1,14 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
 import Orden from './OrdenCocina'
-import type { Orden as OrdenType } from '@/lib/types/pedidos'
+import { OrdenesContext } from './OrdenesProvider'
 
-function CocinaOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
+function CocinaOrdenes() {
   const [filtro, setFiltro] = useState('Todos')
+  const { ordenes } = useContext(OrdenesContext)
   return (
     <div className='p-8'>
       {/* Contenido superior */}
@@ -27,7 +28,7 @@ function CocinaOrdenes({ ordenes }: { ordenes: Array<OrdenType> }) {
         </div>
         
       </div>
-      <ScrollArea className="w-full h-[calc(100vh-200px)]">
+      <ScrollArea className="w-full h-[700px]">
         {filtro === 'Todos' ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
             {ordenes.sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (

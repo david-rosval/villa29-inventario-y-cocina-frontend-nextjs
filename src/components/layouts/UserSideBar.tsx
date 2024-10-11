@@ -12,7 +12,7 @@ function UserSideBar() {
   const pathname = usePathname()
 
   return (
-    <div className="bg-primary h-full text-secondary w-60 pr-3 pt-5 ">
+    <div className="bg-primary h-screen text-secondary w-60 pr-3 pt-5 ">
       <div className="w-full flex justify-center">
         <div className="relative h-20 w-20 rounded-full overflow-hidden">
           <Image 

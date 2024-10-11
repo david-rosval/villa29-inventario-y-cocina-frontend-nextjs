@@ -7,7 +7,7 @@ export async function GET() {
     await connectDb()
     const menuQuery = MenuItem.find() 
     const menu = await menuQuery.exec()
-    console.log(menu);
+    //console.log(menu);
     return NextResponse.json(menu)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
