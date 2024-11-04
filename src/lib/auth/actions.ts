@@ -5,8 +5,16 @@ import axios, { AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+const {
+  MODE,
+  SERVER_URL_PROD,
+  SERVER_URL_DEV,
+} = process.env;
+
+const baseUrl = (MODE && MODE === 'dev') ? SERVER_URL_DEV : SERVER_URL_PROD;
+
 const client = axios.create({
-  baseURL: process.env.SERVER_URL,
+  baseURL: baseUrl,
   withCredentials: true
 });
 
@@ -22,8 +30,6 @@ export async function authenticate(values: { email: string, password: string }) 
     redirect('/ordenes')
   }
 }
-
-
 
 export async function logout() {
   cookies().delete('token')
