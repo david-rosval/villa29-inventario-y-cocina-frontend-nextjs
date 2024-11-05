@@ -88,9 +88,9 @@ export default function NuevaOrden() {
   }
 
   return (
-    <div className=" h-full flex">
+    <div className=" h-full flex mt-[4.5rem]">
       {/* Orden */}
-      <div className="bg-secondary lg:max-w-[600px] w-full p-3 flex flex-col pb-8">
+      <div className="bg-secondary lg:max-w-[600px] w-full p-3 flex flex-col h-full">
         <div className="flex justify-between text-xl font-semibold border-b-2 border-primary pb-2">
           <p>Orden: #{nuevoIdOrden}</p>
           <p>Fecha: {tiempo[0]}</p>

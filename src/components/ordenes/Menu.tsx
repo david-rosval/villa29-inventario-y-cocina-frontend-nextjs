@@ -65,7 +65,7 @@ export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[
         </ScrollArea>
       </div>
       {/* productos de la categoría seleccionada */}
-      <ScrollArea className="w-full h-[calc(100vh-210px)]">
+      <ScrollArea className="w-full h-[calc(100vh-206px)]">
         {!categoriaSeleccionada ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-8 bg-local '>
           {menu?.map((item, i) => (
