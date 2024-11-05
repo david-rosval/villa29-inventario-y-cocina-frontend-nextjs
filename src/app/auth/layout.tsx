@@ -9,7 +9,7 @@ export default function AuthLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="h-screen bg-primary flex justify-center items-center relative overflow-hidden">
+    <div className="h-dvh bg-primary flex justify-center items-center relative overflow-hidden md:p-0 p-4">
       {/* Elipse superior */}
       <div className="absolute top-[-80px] left-[-80px] opacity-90">
         <div className="relative w-[500px] h-[550px] ">
@@ -25,7 +25,7 @@ export default function AuthLayout({
         </div>
       </div>
       {/* logo y formulario */}
-      <div className="z-10 flex flex-col items-center ">
+      <div className="z-10 flex flex-col items-center w-full ">
         <div className="relative h-20 w-20 rounded-full overflow-hidden mb-8">
           <Image 
             src='https://raw.githubusercontent.com/david-rosval/villa29-images-menu/refs/heads/main/logo-restobar.webp'
@@ -33,7 +33,7 @@ export default function AuthLayout({
             fill={true}
           />
         </div>
-        <Card className="w-[450px] mb-10 pt-8 pb-10 px-14">
+        <Card className="md:w-[450px] w-full mb-10 pt-8 pb-10 md:px-14 px-2">
           <CardHeader>
             <CardTitle className="text-xl text-center">Inicio de Sesión</CardTitle>
           </CardHeader>

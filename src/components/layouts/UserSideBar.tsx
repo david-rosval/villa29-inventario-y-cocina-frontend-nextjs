@@ -8,11 +8,11 @@ import Image from "next/image"
 import { logout } from "@/lib/auth/actions"
 
 
-function UserSideBar() {
+function UserSideBar({ toggle }: { toggle?: boolean }) {
   const pathname = usePathname()
 
   return (
-    <div className="bg-primary h-screen text-secondary w-60 pr-3 pt-5 ">
+    <div className={`bg-primary text-secondary w-60 pr-3 pt-5 ${!toggle && "hidden"} lg:block fixed left-0 h-full ${toggle && "block w-full z-10"}`}>
       <div className="w-full flex justify-center">
         <div className="relative h-20 w-20 rounded-full overflow-hidden">
           <Image 

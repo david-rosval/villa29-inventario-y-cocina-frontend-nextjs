@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="h-screen">
+    <div>
         <Image src="/logo-restobar.jpg" alt="Logo" className="mx-auto my-8" width={128} height={128} />
         
         <h1 className="text-4xl font-bold text-center mb-4">Bienvenido al Gestor de Pedidos de Villa 29</h1>

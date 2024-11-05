@@ -31,46 +31,45 @@ function LoginForm() {
   }
 
   return (
-    
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} >
-                <div className="space-y-7">
-                  
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Correo electrónico</FormLabel>
-                        <FormControl>
-                          <Input placeholder="ej. johndoe@ejemplo.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl>
-                          <Input type="password" placeholder="ej. johndoe123" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <Button className="w-full mt-8" type="submit">Iniciar Sesión</Button>
-                <div className="mt-2">
-                  {/* {errors.map((err, i) => (
-                    <FormMessage key={i}>{err}</FormMessage>
-                  ))} */}
-                </div>
-              </form>
-            </Form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)}  >
+        <div className="space-y-7">
+          
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Correo electrónico</FormLabel>
+                <FormControl>
+                  <Input placeholder="ej. johndoe@ejemplo.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Contraseña</FormLabel>
+                <FormControl>
+                  <Input type="password" placeholder="ej. johndoe123" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button className="w-full mt-8" type="submit">Iniciar Sesión</Button>
+        <div className="mt-2">
+          {/* {errors.map((err, i) => (
+            <FormMessage key={i}>{err}</FormMessage>
+          ))} */}
+        </div>
+      </form>
+    </Form>
          
   )
 }

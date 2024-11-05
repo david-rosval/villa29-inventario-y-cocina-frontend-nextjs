@@ -8,7 +8,7 @@ function Return() {
   const router = useRouter()
 
   return (
-    <div>
+    <div className="hidden md:block">
       <Button onClick={() => router.push('/ordenes')} variant="outline" size="icon"  className="rounded-full">
         <ArrowLeftIcon className="h-4 w-4" />
       </Button>

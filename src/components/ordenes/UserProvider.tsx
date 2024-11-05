@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext } from "react"
+import { createContext, useState } from "react"
 
 type UserContextType = {
   user: {
@@ -10,7 +10,8 @@ type UserContextType = {
     email: string
     rol: string
   }
- 
+  toggleSideBar: boolean
+  setToggleSideBar: (toggle: boolean) => void
 }
 
 export const UserContext = createContext<UserContextType | null>(null)
@@ -28,7 +29,8 @@ export default function UserProvider({
     rol: string
   }
 }) {
+  const [toggleSideBar, setToggleSideBar] = useState(false)
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, toggleSideBar, setToggleSideBar  }}>{children}</UserContext.Provider>
   )
 }
