@@ -33,7 +33,7 @@ export async function authenticate(values: { email: string, password: string }) 
 
 export async function logout() {
   cookies().delete('token')
-  redirect('/auth/login')
+  redirect('/')
 }
 
 export async function getUser() {

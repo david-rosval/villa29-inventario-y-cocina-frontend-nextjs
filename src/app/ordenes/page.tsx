@@ -82,16 +82,11 @@ function Ordenes() {
     <>
       <OrdenesProvider state={{ ordenes, setNotificaciones }}>
 
-        {user?.rol === 'Mozo/Cajero' && (
+        {(user?.rol === 'Mozo/Cajero' || user?.rol === 'Administrador') && (
           <MozoOrdenes />
         )}
         {user?.rol === 'Cocinero' && (
           <CocinaOrdenes />
-        )}
-        {user?.rol === 'Administrador' && (
-          <div>
-            <h1>Dashboard</h1>
-          </div>
         )}
       </OrdenesProvider>
     </>

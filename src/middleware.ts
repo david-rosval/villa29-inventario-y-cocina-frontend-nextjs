@@ -8,15 +8,19 @@ export function middleware(request: NextRequest) {
 
   //console.log(token)
   
-  if (token && !request.nextUrl.pathname.startsWith('/ordenes')) {
+  /* if (token && !request.nextUrl.pathname.startsWith('/ordenes')) {
+    return NextResponse.redirect(new URL('/ordenes', request.url))
+  } */
+
+  if (token && request.nextUrl.pathname.startsWith('/auth/login')) {
     return NextResponse.redirect(new URL('/ordenes', request.url))
   }
   
-  if (!token && !request.nextUrl.pathname.startsWith('/')) {
+  /* if (token && request.nextUrl.pathname.startsWith('/')) {
     return NextResponse.redirect(new URL('/', request.url))
-  }
+  } */
 
-  if (!token && !request.nextUrl.pathname.startsWith('/auth/login')) {
+  if (!token && !request.nextUrl.pathname.startsWith('/auth/login') && !request.nextUrl.pathname.endsWith('/')) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
   
