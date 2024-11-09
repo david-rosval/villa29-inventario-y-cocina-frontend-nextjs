@@ -2,13 +2,18 @@
 
 import Link from "next/link"
 import { Button } from "../ui/button"
-import { HomeIcon, ListBulletIcon, ExitIcon } from "@radix-ui/react-icons"
+import { HomeIcon, ListBulletIcon, ExitIcon, DashboardIcon } from "@radix-ui/react-icons"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { logout } from "@/lib/auth/actions"
+import { useContext } from "react"
+import { UserContext } from "../ordenes/UserProvider"
 
 
 function UserSideBar({ toggle }: { toggle?: boolean }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { user }: any = useContext(UserContext)
+
   const pathname = usePathname()
 
   return (
@@ -47,6 +52,22 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
             <p className="text-lg">Órdenes</p>
           </Button>
         </Link> 
+
+        {user?.rol === 'Administrador' && (
+          <Link 
+            href={"/ordenes/dashboard"} 
+          >
+            <Button 
+              variant="outline"
+              className={`${pathname === "/ordenes/dashboard" ? 'bg-secondary text-primary hover:bg-secondary hover:text-primary' : 'bg-primary text-secondary hover:bg-primary hover:text-secondary'} w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14`}
+            >
+              <DashboardIcon className="h-5 w-5" />
+              <p className="text-lg">Dashboard</p>
+            </Button>
+          </Link> 
+        )}
+
+
         <Button 
           variant="outline"
           className={`bg-primary text-secondary w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14 hover:bg-primary hover:text-secondary`}

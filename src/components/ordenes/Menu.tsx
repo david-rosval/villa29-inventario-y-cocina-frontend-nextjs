@@ -5,16 +5,7 @@ import { useState } from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
 import { ScrollArea, ScrollBar } from "../ui/scroll-area"
-import type { Item } from '@/lib/types/pedidos'
-
-type MenuItem = {
-  _id: string
-  id: number
-  nombre: string
-  precio: number
-  categoria: string
-  img: string
-}
+import type { Item, MenuItem } from '@/lib/types/pedidos'
 
 export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[], setOrdenList: (value: Item[]) => void, menu: MenuItem[] }) {
  
@@ -48,15 +39,15 @@ export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[
   }
 
   return (
-    <div className="w-full bg-gray-400 flex flex-col p-8">
+    <div className="w-full  bg-gray-400 lg:flex flex-col p-8">
       {/* categorías */}
       <div className="flex justify-between gap-2 pb-3 border-b-2 border-primary">
-        <ScrollArea className="w-full h-14 whitespace-nowrap">
+        <ScrollArea className="w-full h-[7vh] pb-3 whitespace-nowrap">
           {categorias?.map((categoria, i) => (
             <Button 
               key={i} 
               onClick={() => setCategoriaSeleccionada(categoria)} 
-              className={`mx-2 w-1/5 h-10 ${categoriaSeleccionada === categoria && 'bg-red-500 text-secondary hover:bg-red-500 hover:text-secondary'}`}
+              className={`mx-2 w-1/6 h-full  ${categoriaSeleccionada === categoria && 'bg-red-500 text-secondary hover:bg-red-500 hover:text-secondary'}`}
             >
               {categoria}
             </Button>
@@ -65,7 +56,7 @@ export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[
         </ScrollArea>
       </div>
       {/* productos de la categoría seleccionada */}
-      <ScrollArea className="w-full h-[calc(100vh-206px)]">
+      <ScrollArea className="w-full h-[70vh] mt-5">
         {!categoriaSeleccionada ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(200px,_1fr))] gap-8 bg-local '>
           {menu?.map((item, i) => (

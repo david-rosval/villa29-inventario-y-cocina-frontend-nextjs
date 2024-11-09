@@ -1,0 +1,630 @@
+[
+  {
+    "_id": "7462ee9fcf77cd19eb456ffb",
+    "fecha": "18/10/2024",
+    "horaAsignado": "18:26",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f76",
+          "id": 16,
+          "nombre": "Tequeños de Queso",
+          "precio": 9.9,
+          "categoria": "Piqueos",
+          "img": "tequenos-de-queso.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ee9fcf77cd19eb456ffc"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f77",
+          "id": 17,
+          "nombre": "Trilogía 1",
+          "precio": 30,
+          "categoria": "Piqueos",
+          "img": "trilogia-1.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ee9fcf77cd19eb456ffd"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f74",
+          "id": 14,
+          "nombre": "Mixta",
+          "precio": 12.9,
+          "categoria": "Salchipapas",
+          "img": "salchipapa-mixta.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ee9fcf77cd19eb456ffe"
+      }
+    ],
+    "horaTerminado": "19:02",
+    "estado": "Entregado",
+    "precioTotal": 52.8,
+    "__v": 0
+  },
+  {
+    "_id": "7462eec8cf77cd19eb457034",
+    "fecha": "18/10/2024",
+    "horaAsignado": "18:27",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f73",
+          "id": 13,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Salchipapas",
+          "img": "salchipapa-clasica.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462eec8cf77cd19eb457035"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6e",
+          "id": 8,
+          "nombre": "Alitas Crujientes",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-crujientes.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462eec8cf77cd19eb457036"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f72",
+          "id": 12,
+          "nombre": "Alitas Oriental",
+          "precio": 17,
+          "categoria": "Alitas",
+          "img": "alitas-oriental.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462eec8cf77cd19eb457037"
+      }
+    ],
+    "horaTerminado": "19:24",
+    "estado": "Entregado",
+    "precioTotal": 43.9,
+    "__v": 0
+  },
+  {
+    "_id": "7462ef27cf77cd19eb45704f",
+    "fecha": "18/10/2024",
+    "horaAsignado": "18:28",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ef27cf77cd19eb457050"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6b",
+          "id": 5,
+          "nombre": "Royal",
+          "precio": 14.9,
+          "categoria": "Hamburguesas",
+          "img": "royal.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ef27cf77cd19eb457051"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f72",
+          "id": 12,
+          "nombre": "Alitas Oriental",
+          "precio": 17,
+          "categoria": "Alitas",
+          "img": "alitas-oriental.webp"
+        },
+        "cantidad": 1,
+        "_id": "7462ef27cf77cd19eb457052"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 42.8,
+    "__v": 0,
+    "horaTerminado": "10:48"
+  },
+  {
+    "_id": "746305a6a8f238522a8e7b0c",
+    "fecha": "18/10/2024",
+    "horaAsignado": "20:04",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 1,
+        "_id": "746305a6a8f238522a8e7b0d"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6a",
+          "id": 4,
+          "nombre": "Crujiente",
+          "precio": 13.9,
+          "categoria": "Hamburguesas",
+          "img": "crujiente.webp"
+        },
+        "cantidad": 2,
+        "_id": "746305a6a8f238522a8e7b0e"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f70",
+          "id": 10,
+          "nombre": "Alitas Acevichadas",
+          "precio": 18,
+          "categoria": "Alitas",
+          "img": "alitas-acevichadas.webp"
+        },
+        "cantidad": 1,
+        "_id": "746305a6a8f238522a8e7b0f"
+      }
+    ],
+    "estado": "Listo",
+    "precioTotal": 56.7,
+    "__v": 0
+  },
+  {
+    "_id": "7463071ca8f238522a8e7b55",
+    "fecha": "18/10/2024",
+    "horaAsignado": "20:10",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f79",
+          "id": 19,
+          "nombre": "Carne de Cerdo Marinado",
+          "precio": 16,
+          "categoria": "Platos a la Carta",
+          "img": "carne-de-cerdo-marinado.webp"
+        },
+        "cantidad": 2,
+        "_id": "7463071ca8f238522a8e7b56"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f7c",
+          "id": 22,
+          "nombre": "Bisteck a lo Pobre",
+          "precio": 18,
+          "categoria": "Platos a la Carta",
+          "img": "bisteck-a-lo-pobre.webp"
+        },
+        "cantidad": 1,
+        "_id": "7463071ca8f238522a8e7b57"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f7a",
+          "id": 20,
+          "nombre": "Pollo a la Plancha",
+          "precio": 16,
+          "categoria": "Platos a la Carta",
+          "img": "pollo-a-la-plancha.webp"
+        },
+        "cantidad": 1,
+        "_id": "7463071ca8f238522a8e7b58"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f7b",
+          "id": 21,
+          "nombre": "Lomo Saltado",
+          "precio": 18,
+          "categoria": "Platos a la Carta",
+          "img": "lomo-saltado.webp"
+        },
+        "cantidad": 1,
+        "_id": "7463071ca8f238522a8e7b59"
+      }
+    ],
+    "estado": "Listo",
+    "precioTotal": 84,
+    "__v": 0
+  },
+  {
+    "_id": "74630897a8f238522a8e7c75",
+    "fecha": "18/10/2024",
+    "horaAsignado": "20:17",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f70",
+          "id": 10,
+          "nombre": "Alitas Acevichadas",
+          "precio": 18,
+          "categoria": "Alitas",
+          "img": "alitas-acevichadas.webp"
+        },
+        "cantidad": 1,
+        "_id": "74630897a8f238522a8e7c76"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6d",
+          "id": 7,
+          "nombre": "Alitas BBQ",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-bbq.webp"
+        },
+        "cantidad": 1,
+        "_id": "74630897a8f238522a8e7c77"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6e",
+          "id": 8,
+          "nombre": "Alitas Crujientes",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-crujientes.webp"
+        },
+        "cantidad": 1,
+        "_id": "74630897a8f238522a8e7c78"
+      }
+    ],
+    "estado": "Listo",
+    "precioTotal": 50,
+    "__v": 0
+  },
+  {
+    "_id": "7464100385e44dadd867e6cf",
+    "fecha": "19/10/2024",
+    "horaAsignado": "15:01",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 5,
+        "_id": "7464100385e44dadd867e6d0"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f68",
+          "id": 2,
+          "nombre": "Chesse Burger",
+          "precio": 12.9,
+          "categoria": "Hamburguesas",
+          "img": "chesse-burger.webp"
+        },
+        "cantidad": 1,
+        "_id": "7464100385e44dadd867e6d1"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f69",
+          "id": 3,
+          "nombre": "A lo Pobre",
+          "precio": 13.9,
+          "categoria": "Hamburguesas",
+          "img": "a-lo-pobre.webp"
+        },
+        "cantidad": 1,
+        "_id": "7464100385e44dadd867e6d2"
+      }
+    ],
+    "estado": "Listo",
+    "precioTotal": 81.30000000000001,
+    "__v": 0
+  },
+  {
+    "_id": "746ee3213fab047dce15e1f9",
+    "fecha": "27/10/2024",
+    "horaAsignado": "20:04",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6d",
+          "id": 7,
+          "nombre": "Alitas BBQ",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-bbq.webp"
+        },
+        "cantidad": 1,
+        "_id": "746ee3213fab047dce15e1fa"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f7d",
+          "id": 23,
+          "nombre": "Hot Dog Frankfurt",
+          "precio": 2.5,
+          "categoria": "Adicionales",
+          "img": "hot-dog-frankfurt.webp"
+        },
+        "cantidad": 1,
+        "_id": "746ee3213fab047dce15e1fb"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 18.5,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746ee3393fab047dce15e24b",
+    "fecha": "27/10/2024",
+    "horaAsignado": "20:04",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6d",
+          "id": 7,
+          "nombre": "Alitas BBQ",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-bbq.webp"
+        },
+        "cantidad": 3,
+        "_id": "746ee3393fab047dce15e24c"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f76",
+          "id": 16,
+          "nombre": "Tequeños de Queso",
+          "precio": 9.9,
+          "categoria": "Piqueos",
+          "img": "tequenos-de-queso.webp"
+        },
+        "cantidad": 1,
+        "_id": "746ee3393fab047dce15e24d"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 57.9,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746eec7a3fab047dce15e367",
+    "fecha": "27/10/2024",
+    "horaAsignado": "20:44",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 2,
+        "_id": "746eec7a3fab047dce15e368"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 21.8,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746eedc23fab047dce15e3fb",
+    "fecha": "27/10/2024",
+    "horaAsignado": "20:49",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f70",
+          "id": 10,
+          "nombre": "Alitas Acevichadas",
+          "precio": 18,
+          "categoria": "Alitas",
+          "img": "alitas-acevichadas.webp"
+        },
+        "cantidad": 1,
+        "_id": "746eedc23fab047dce15e3fc"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 18,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746eef263fab047dce15e5e6",
+    "fecha": "27/10/2024",
+    "horaAsignado": "20:55",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6e",
+          "id": 8,
+          "nombre": "Alitas Crujientes",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-crujientes.webp"
+        },
+        "cantidad": 1,
+        "_id": "746eef263fab047dce15e5e7"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 16,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746f01d2ef655bd2e706634a",
+    "fecha": "27/10/2024",
+    "horaAsignado": "22:15",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f77",
+          "id": 17,
+          "nombre": "Trilogía 1",
+          "precio": 30,
+          "categoria": "Piqueos",
+          "img": "trilogia-1.webp"
+        },
+        "cantidad": 2,
+        "_id": "746f01d2ef655bd2e706634b"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f83",
+          "id": 29,
+          "nombre": "La Ruleta Villa 29",
+          "precio": 35,
+          "categoria": "Juegos",
+          "img": "ruleta-villa-29.webp"
+        },
+        "cantidad": 1,
+        "_id": "746f01d2ef655bd2e706634c"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 95,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746f01e6ef655bd2e70663b1",
+    "fecha": "27/10/2024",
+    "horaAsignado": "22:15",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6d",
+          "id": 7,
+          "nombre": "Alitas BBQ",
+          "precio": 16,
+          "categoria": "Alitas",
+          "img": "alitas-bbq.webp"
+        },
+        "cantidad": 1,
+        "_id": "746f01e6ef655bd2e70663b2"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 16,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "74695384d4a76d56f2e2424d",
+    "fecha": "04/11/2024",
+    "horaAsignado": "18:06",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f68",
+          "id": 2,
+          "nombre": "Chesse Burger",
+          "precio": 12.9,
+          "categoria": "Hamburguesas",
+          "img": "chesse-burger.webp"
+        },
+        "cantidad": 1,
+        "_id": "74695384d4a76d56f2e2424e"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 2,
+        "_id": "74695384d4a76d56f2e2424f"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6a",
+          "id": 4,
+          "nombre": "Crujiente",
+          "precio": 13.9,
+          "categoria": "Hamburguesas",
+          "img": "crujiente.webp"
+        },
+        "cantidad": 1,
+        "_id": "74695384d4a76d56f2e24250"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 48.6,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  },
+  {
+    "_id": "746e2b2fedf3df3636aa25c1",
+    "fecha": "08/11/2024",
+    "horaAsignado": "10:15",
+    "pedidos": [
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f67",
+          "id": 1,
+          "nombre": "Clásica",
+          "precio": 10.9,
+          "categoria": "Hamburguesas",
+          "img": "clasica.webp"
+        },
+        "cantidad": 1,
+        "_id": "746e2b2fedf3df3636aa25c2"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f6b",
+          "id": 5,
+          "nombre": "Royal",
+          "precio": 14.9,
+          "categoria": "Hamburguesas",
+          "img": "royal.webp"
+        },
+        "cantidad": 1,
+        "_id": "746e2b2fedf3df3636aa25c3"
+      },
+      {
+        "menuItem": {
+          "_id": "74689db90c2f0c0a36f03f68",
+          "id": 2,
+          "nombre": "Chesse Burger",
+          "precio": 12.9,
+          "categoria": "Hamburguesas",
+          "img": "chesse-burger.webp"
+        },
+        "cantidad": 2,
+        "_id": "746e2b2fedf3df3636aa25c4"
+      }
+    ],
+    "estado": "Entregado",
+    "precioTotal": 51.6,
+    "__v": 0,
+    "horaTerminado": "10:49"
+  }
+]

@@ -25,3 +25,12 @@ export type Orden = {
   precioTotal: number
   _id:string
 }
+
+export type MenuItem = {
+  _id: string
+  id: number
+  nombre: string
+  precio: number
+  categoria: string
+  img: string
+}

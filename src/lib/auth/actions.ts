@@ -4,6 +4,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { User } from '../types/user';
 
 const {
   MODE,
@@ -36,12 +37,13 @@ export async function logout() {
   redirect('/')
 }
 
-export async function getUser() {
+export async function getUser(): Promise<User | undefined>  {
   try {
     const response: AxiosResponse = await client.get('/auth/profile', {
       headers: { 'authorization': cookies().get('token')?.value } 
     })
-    return response.data
+    const user: User = response.data
+    return user
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error:any) {
     console.log({ error: 'Error obteniendo perfil del usuario' })

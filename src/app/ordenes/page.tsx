@@ -52,11 +52,16 @@ function Ordenes() {
       setNotificaciones((notificaciones) => [...notificaciones, '¡Nuevo pedido!'])
     })
 
+    socket.on('pedido-entregado', () => {
+      setNotificaciones((notificaciones) => [...notificaciones, 'Pedido entregado!'])
+    })
+
     return () => {
       socket.off('connect', onConnect)
       socket.off('disconnect', onDisconnect)
       socket.off('pedido-listo')
       socket.off('nuevo-pedido')
+      socket.off('pedido-entregado')
     }
   }, [])
 

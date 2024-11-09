@@ -12,6 +12,7 @@ import type { Item } from '@/lib/types/pedidos'
 import { useRouter } from "next/navigation"
 import { socket } from "@/socket"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import NuevaOrdenMobile from "@/components/ordenes/NuevaOrdenMobile"
 
 
 
@@ -27,6 +28,9 @@ export default function NuevaOrden() {
   const [ordenList, setOrdenList] = useState<Item[]>([])
 
   const [errorVacio, setErrorVacio] = useState(false)
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [toggleOrden, setToggleOrden] = useState(false)
   
   useEffect(() => {
     async function fetchMenu() {
@@ -88,52 +92,62 @@ export default function NuevaOrden() {
   }
 
   return (
-    <div className=" h-full flex mt-[4.5rem]">
+    <div className=" h-dvh lg:flex pt-[4.5rem] relative">
       {/* Orden */}
-      <div className="bg-secondary lg:max-w-[600px] w-full p-3 flex flex-col h-full">
-        <div className="flex justify-between text-xl font-semibold border-b-2 border-primary pb-2">
-          <p>Orden: #{nuevoIdOrden}</p>
-          <p>Fecha: {tiempo[0]}</p>
-        </div>
-        {/* Items */}
-        <div className="h-full">
-          <div className="flex justify-around text-center py-2">
-            <p className="w-full">Nombre</p>
-            <p className="w-full">Cantidad</p>
-            <p className="w-full">P. Unitario</p>
-            <p className="w-full">Total</p>
+      {!toggleOrden ? (
+        <div className="hidden bg-secondary lg:max-w-[30vw] w-full p-3 lg:flex flex-col justify-around h-full">
+          <div className="flex justify-between text-xl font-semibold border-b-2 border-primary pb-2">
+            <p>Orden: #{nuevoIdOrden}</p>
+            <p>Fecha: {tiempo[0]}</p>
           </div>
-          <ScrollArea className="h-[calc(100vh-450px)] w-full">
-            {ordenList.length ? ordenList.map((item, index) => (
-              <OrdenItem key={index} item={item} ordenList={ordenList} setOrdenList={setOrdenList} />
-            )) : (
-              <p className="text-center font-semibold">Agrega pedidos</p>
-            )}
-          </ScrollArea>
-        </div>
-        {/* Resumen */}
-        <div className="h-[250px] border-t-2 border-primary pt-10 flex flex-col justify-between">
-          <div className="flex w-full h-full justify-around">
-            <div className="flex w-1/2 gap-8 h-full">
-              <div>
-                <p>Subtotal:</p>
-                <p>Descuentos:</p>
+          {/* Items */}
+          <div className="">
+            <div className="flex justify-around items-center  text-center py-2 font-semibold text-lg">
+              <p className="w-full">Nombre</p>
+              <p className="w-full">Cantidad</p>
+              <p className="w-full">P. Unitario</p>
+              <p className="w-full">Total</p>
+            </div>
+            <ScrollArea className="h-[60vh] w-full">
+              {ordenList.length ? ordenList.map((item, index) => (
+                <OrdenItem key={index} item={item} ordenList={ordenList} setOrdenList={setOrdenList} />
+              )) : (
+                <p className="text-center font-semibold">Agrega pedidos</p>
+              )}
+            </ScrollArea>
+          </div>
+          {/* Resumen */}
+          <div className=" border-t-2 border-primary flex flex-col justify-between gap-5 pt-8">
+            <div className="flex items-center w-full h-full justify-around">
+              <div className="flex w-1/2 gap-8">
+                <div>
+                  <p>Subtotal:</p>
+                  <p>Descuentos:</p>
+                </div>
+                <div>
+                  <p>S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
+                  <p>S/.{0}</p>
+                </div>
               </div>
-              <div>
-                <p>S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
-                <p>S/.{0}</p>
+              <div className="w-1/2 text-2xl font-bold uppercase text-right">
+                <p>Total: S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
               </div>
             </div>
-            <div className="w-1/2 text-2xl font-bold uppercase text-right">
-              <p>Total: S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
+            <div className="flex justify-end gap-6">
+        
+              <Button onClick={handleEnviarACocina} className="w-full py-8 text-xl font-semibold uppercase">Enviar</Button>
             </div>
           </div>
-          <div className="flex justify-end gap-6">
-       
-            <Button onClick={handleEnviarACocina} className="w-44 h-10">Enviar</Button>
-          </div>
         </div>
-      </div>
+      ) : (
+        <NuevaOrdenMobile 
+          ordenList={ordenList} 
+          setOrdenList={setOrdenList} 
+          tiempo={tiempo[0]} 
+          handleEnviarACocina={handleEnviarACocina} 
+          menu={menu}
+        />
+      )}
       {/* Menú */}
       <Menu ordenList={ordenList} setOrdenList={setOrdenList} menu={menu} />
       {errorVacio && (
@@ -183,7 +197,7 @@ function OrdenItem({item, ordenList, setOrdenList}: {item: Item, ordenList: Item
 
   return (
     <div className="flex justify-around text-center py-2">
-      <p className="w-full">{item.nombre}</p>
+      <p className="truncate w-full">{item.nombre}</p>
       <div className="w-full flex justify-center gap-2 items-center">
         <Button 
           variant="outline" 

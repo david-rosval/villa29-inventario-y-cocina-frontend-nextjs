@@ -10,7 +10,7 @@ function CocinaOrdenes() {
   const [filtro, setFiltro] = useState('Todos')
   const { ordenes } = useContext(OrdenesContext)
   return (
-    <div className='p-8'>
+    <div className='p-8 mt-[4.5rem]'>
       {/* Contenido superior */}
       <div className='flex justify-between'>
         <h1 className='text-3xl font-bold'>Todas las órdenes</h1>
@@ -25,10 +25,13 @@ function CocinaOrdenes() {
           <Button onClick={() => setFiltro('En preparación')} className={`h-10 ${filtro === 'En preparación' && 'bg-yellow-500 text-secondary hover:bg-yellow-500 hover:text-secondary'}`}>
             <p className=''>En preparación</p>
           </Button>
+          <Button onClick={() => setFiltro('Entregado')} className={`h-10 ${filtro === 'Entregado' && 'bg-secondary text-primary hover:bg-secondary hover:text-primary'}`}>
+            <p className=''>Entregado</p>
+          </Button>
         </div>
         
       </div>
-      <ScrollArea className="w-full h-[700px]">
+      <ScrollArea className="w-full h-[75vh] mt-5">
         {filtro === 'Todos' ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
             {ordenes.sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (
