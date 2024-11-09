@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import NumberTicker from "../ui/number-ticker";
 
 export default function GananciasTotales({ gananciaTotal }: { gananciaTotal: number }) {
