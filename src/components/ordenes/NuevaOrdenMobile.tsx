@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Item, MenuItem } from "@/lib/types/pedidos"
 
 export default function NuevaOrdenMobile({

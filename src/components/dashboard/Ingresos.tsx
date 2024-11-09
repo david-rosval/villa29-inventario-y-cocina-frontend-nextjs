@@ -92,7 +92,7 @@ export default function Ingresos({diario, mensual}: {
               minTickGap={32}
               tickFormatter={(value) => {
                 if (activeChart === "diario") {
-                  const { dia, mes, year } = obtenerDetallesFecha(value)
+                  const { dia, mes } = obtenerDetallesFecha(value)
                   return `${dia} ${mes[0].slice(0, 3)}`
                 } else {
                   return value
