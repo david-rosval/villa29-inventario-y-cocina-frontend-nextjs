@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -102,6 +103,82 @@ export function obtenerDetallesFecha(fecha: string): { dia: number; mes: string[
     year,
   };
 }
+
+export function obtenerPedidosHoyOrdenadosParaMozo(pedidos: any[]) {
+  const hoy = new Date();
+  const dia = hoy.getDate().toString().padStart(2, '0');
+  const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');
+  const año = hoy.getFullYear();
+  const fechaHoy = `${dia}/${mes}/${año}`;
+
+  // Filtrar los pedidos de hoy
+  const pedidosHoy = pedidos.filter(pedido => pedido.fecha === fechaHoy);
+
+  // Ordenar los pedidos según los criterios dados
+  return pedidosHoy.sort((a: { estado: string; horaTerminado?: string; horaAsignado: string }, b: { estado: string; horaTerminado?: string; horaAsignado: string }) => {
+    // Primero, ordenar por estado: "Listo", "En preparación", luego "Entregado"
+    const estadoPrioridad = { "Listo": 1, "En preparación": 2, "Entregado": 3 };
+    const prioridadA = estadoPrioridad[a.estado as keyof typeof estadoPrioridad];
+    const prioridadB = estadoPrioridad[b.estado as keyof typeof estadoPrioridad];
+
+    if (prioridadA !== prioridadB) {
+      return prioridadA - prioridadB;
+    }
+
+    // Si ambos son "Entregado", ordenar por horaTerminado en forma descendente
+    if (a.estado === "Entregado" && b.estado === "Entregado") {
+      return b.horaTerminado!.localeCompare(a.horaTerminado!);
+    }
+
+    // Si ambos son "En preparación" o "Listo", ordenar por horaAsignado en forma ascendente
+    if (a.estado !== "Entregado" && b.estado !== "Entregado") {
+      return a.horaAsignado.localeCompare(b.horaAsignado);
+    }
+
+    return 0; // Si no se cumplen las condiciones anteriores, los pedidos son iguales en prioridad
+  });
+}
+
+export function obtenerPedidosHoyOrdenadosParaCocina(pedidos: any[]) {
+  const hoy = new Date();
+  const dia = hoy.getDate().toString().padStart(2, '0');
+  const mes = (hoy.getMonth() + 1).toString().padStart(2, '0');
+  const año = hoy.getFullYear();
+  const fechaHoy = `${dia}/${mes}/${año}`;
+
+  // Filtrar los pedidos de hoy
+  const pedidosHoy = pedidos.filter(pedido => pedido.fecha === fechaHoy);
+
+  // Ordenar los pedidos según los criterios dados
+  return pedidosHoy.sort((a, b) => {
+    // Primero, ordenar por estado: "En preparación", "Listo", luego "Entregado"
+    const estadoPrioridad = { "En preparación": 1, "Listo": 2, "Entregado": 3 };
+    const prioridadA = estadoPrioridad[a.estado as keyof typeof estadoPrioridad];
+    const prioridadB = estadoPrioridad[b.estado as keyof typeof estadoPrioridad];
+
+    if (prioridadA !== prioridadB) {
+      return prioridadA - prioridadB;
+    }
+
+    // Si ambos están "Entregado", ordenar por horaTerminado en forma descendente
+    if (a.estado === "Entregado" && b.estado === "Entregado") {
+      return b.horaTerminado!.localeCompare(a.horaTerminado!);
+    }
+
+    // Si ambos están "Listo", ordenar por horaAsignado en forma ascendente
+    if (a.estado === "Listo" && b.estado === "Listo") {
+      return a.horaAsignado.localeCompare(b.horaAsignado);
+    }
+
+    // Si ambos están "En preparación", ordenar por horaAsignado en forma descendente
+    if (a.estado === "En preparación" && b.estado === "En preparación") {
+      return b.horaAsignado.localeCompare(a.horaAsignado);
+    }
+
+    return 0; // Si no se cumplen las condiciones anteriores, los pedidos son iguales en prioridad
+  });
+}
+
 
 type GananciaMensual = {
   mes: string;

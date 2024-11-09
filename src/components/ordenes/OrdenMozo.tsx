@@ -8,6 +8,7 @@ import { useContext } from "react"
 import { OrdenesContext } from "./OrdenesProvider"
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Orden({ orden, i }: { orden: Orden, i: number }) {
   const { setNotificaciones } = useContext(OrdenesContext)
 
@@ -25,7 +26,7 @@ function Orden({ orden, i }: { orden: Orden, i: number }) {
    
     <div className={`flex flex-col border-2 ${orden.estado === 'Listo' && 'border-green-300 border-4'} rounded-lg`}>
       <div className="flex justify-between border px-2">
-        <p className="uppercase font-semibold">Orden {i+1}</p>
+        <p className="uppercase font-semibold">Orden {`${orden.fecha.replace(/\//g, '')}${orden.horaAsignado.replace(/:/g, '')}`}</p>
         <p>{orden.fecha} {orden.horaAsignado}</p>
       </div>
       <div className="flex justify-between border px-2 bg-gray-200">

@@ -16,7 +16,7 @@ export default function NuevaOrdenMobile({
 }) {
   return (
     <div className="lg:hidden h-full w-full relative bg-green-400 flex justify-center items-center">
-      <div></div>
+      <div>ADSFSSSSSSSSSSSSSSSSSSLOR Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia voluptas totam quis tenetur, non, est sed aliquid quisquam placeat facere consequuntur! Repudiandae voluptates, fugiat eius nesciunt modi cupiditate illo nobis.</div>
     </div>
   )
 }

@@ -39,7 +39,7 @@ export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[
   }
 
   return (
-    <div className="w-full  bg-gray-400 lg:flex flex-col p-8">
+    <div className="w-full lg:flex flex-col p-8">
       {/* categorías */}
       <div className="flex justify-between gap-2 pb-3 border-b-2 border-primary">
         <ScrollArea className="w-full h-[7vh] pb-3 whitespace-nowrap">
@@ -89,7 +89,10 @@ function MenuItemCard({ item, handleFunction }: { item: MenuItem, handleFunction
           />
         </div>
         <div className="flex justify-between items-center px-3 py-2">
-          <p className="text-lg font-semibold text-wrap">{item.nombre}</p>
+          <div>
+            <p className="text-lg font-semibold text-wrap leading-none mb-3">{item.nombre}</p>
+            <p className="text-opacity-50 text-lg text-wrap">S/. { item.precio.toFixed(2) }</p>
+          </div>
           
           <Button variant="outline" size="icon" onClick={() => handleFunction(item)} className="rounded-full">
               <PlusIcon className="h-6 w-6" />

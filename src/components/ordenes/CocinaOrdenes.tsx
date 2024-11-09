@@ -5,9 +5,10 @@ import { Button } from '../ui/button'
 import { ScrollArea } from '../ui/scroll-area'
 import Orden from './OrdenCocina'
 import { OrdenesContext } from './OrdenesProvider'
+import { obtenerPedidosHoyOrdenadosParaCocina } from '@/lib/utils'
 
 function CocinaOrdenes() {
-  const [filtro, setFiltro] = useState('Todos')
+  const [filtro, setFiltro] = useState('En preparación')
   const { ordenes } = useContext(OrdenesContext)
   return (
     <div className='p-8 mt-[4.5rem]'>
@@ -23,7 +24,7 @@ function CocinaOrdenes() {
             <p className=''>Listos</p>
           </Button>
           <Button onClick={() => setFiltro('En preparación')} className={`h-10 ${filtro === 'En preparación' && 'bg-yellow-500 text-secondary hover:bg-yellow-500 hover:text-secondary'}`}>
-            <p className=''>En preparación</p>
+            <p className=''>Asignados</p>
           </Button>
           <Button onClick={() => setFiltro('Entregado')} className={`h-10 ${filtro === 'Entregado' && 'bg-secondary text-primary hover:bg-secondary hover:text-primary'}`}>
             <p className=''>Entregado</p>
@@ -34,13 +35,13 @@ function CocinaOrdenes() {
       <ScrollArea className="w-full h-[75vh] mt-5">
         {filtro === 'Todos' ? (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
-            {ordenes.sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (
+            {obtenerPedidosHoyOrdenadosParaCocina(ordenes).map((orden, index: number) => (
               <Orden key={index} orden={orden} i={index} />
             ))}
           </div>
         ) : (
           <div className='mt-8 w-full grid grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] gap-8 bg-local '>
-            {ordenes.filter(orden => orden.estado === filtro).sort((a,b) => a.estado.localeCompare(b.estado)).map((orden, index: number) => (
+            {obtenerPedidosHoyOrdenadosParaCocina(ordenes.filter(orden => orden.estado === filtro)).map((orden, index: number) => (
               <Orden key={index} orden={orden} i={index} />
             ))}
           </div>

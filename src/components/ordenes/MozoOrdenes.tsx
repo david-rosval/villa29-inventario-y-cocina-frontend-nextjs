@@ -8,6 +8,7 @@ import Orden from './OrdenMozo'
 import { OrdenesContext } from './OrdenesProvider'
 import { UserContext } from './UserProvider'
 import UserSideBar from '../layouts/UserSideBar'
+import { obtenerPedidosHoyOrdenadosParaMozo } from '@/lib/utils'
 
 function MozoOrdenes() {
   const { ordenes } = useContext(OrdenesContext)
@@ -31,7 +32,7 @@ function MozoOrdenes() {
             </Link>
           </div>
           <div className='mt-8 w-full grid lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-8 bg-local '>
-            {ordenes.sort((a,b) => b.estado.localeCompare(a.estado)).map((orden, index: number) => (
+            {obtenerPedidosHoyOrdenadosParaMozo(ordenes).map((orden, index: number) => (
               <Orden key={index} orden={orden} i={index} />
             ))}
           </div>
