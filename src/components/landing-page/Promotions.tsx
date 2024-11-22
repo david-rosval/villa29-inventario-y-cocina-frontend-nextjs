@@ -48,6 +48,7 @@ const Promotions = () => {
                             width={50}
                             height={20}
                             className="object-contain"
+                            unoptimized
                         />
                     </div>
 
