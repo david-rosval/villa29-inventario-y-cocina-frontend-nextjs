@@ -4,8 +4,18 @@ import { Button } from "../ui/button"
 import { useState } from "react"
 import { PlusIcon } from "@radix-ui/react-icons"
 import Image from "next/image"
-import { ScrollArea, ScrollBar } from "../ui/scroll-area"
+import { ScrollArea } from "../ui/scroll-area"
 import type { Item, MenuItem } from '@/lib/types/pedidos'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[], setOrdenList: (value: Item[]) => void, menu: MenuItem[] }) {
  
@@ -41,19 +51,49 @@ export default function Menu({ordenList, setOrdenList, menu}: { ordenList: Item[
   return (
     <div className="w-full lg:flex flex-col p-8">
       {/* categorías */}
-      <div className="flex justify-between gap-2 pb-3 border-b-2 border-primary">
-        <ScrollArea className="w-full h-[7vh] pb-3 whitespace-nowrap">
-          {categorias?.map((categoria, i) => (
-            <Button 
-              key={i} 
-              onClick={() => setCategoriaSeleccionada(categoria)} 
-              className={`mx-2 w-1/6 h-full  ${categoriaSeleccionada === categoria && 'bg-red-500 text-secondary hover:bg-red-500 hover:text-secondary'}`}
-            >
-              {categoria}
-            </Button>
-          ))}
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+      <div className="flex flex-col">
+        
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="py-6" variant={categoriaSeleccionada === '' ? "default" : "destructive" }>{categoriaSeleccionada === '' ? "Seleccionar categoría" : categoriaSeleccionada }</Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Filtrar por categoría</DialogTitle>
+              <DialogDescription>
+                Elige la categoría
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-3 gap-4 py-4 border-b">
+              {categorias?.map((categoria, i) => (
+                <Button 
+                  variant={categoriaSeleccionada === categoria ? 'destructive' : 'secondary'}
+                  key={i} 
+                  onClick={() => setCategoriaSeleccionada(categoria)} 
+                  className={`py-5  ${categoriaSeleccionada === categoria && 'bg-red-500 text-secondary hover:bg-red-500 hover:text-secondary'}`}
+                >
+                  {categoria}
+                </Button>
+              ))}
+            </div>
+            <DialogFooter>
+              <div className="flex justify-around gap-4 w-full">
+                <DialogClose asChild>
+                  <Button className="w-1/2" variant="outline" type="button" onClick={() => setCategoriaSeleccionada("")}>
+                    Limpiar filtro
+                  </Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button className="w-1/2" type="button" >
+                    Aplicar cambios
+                  </Button>
+                </DialogClose>
+              </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+         
       </div>
       {/* productos de la categoría seleccionada */}
       <ScrollArea className="w-full h-[70vh] mt-5">

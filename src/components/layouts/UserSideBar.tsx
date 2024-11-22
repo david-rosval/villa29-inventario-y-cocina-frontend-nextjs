@@ -17,7 +17,7 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
   const pathname = usePathname()
 
   return (
-    <div className={`bg-primary text-secondary w-60 pr-3 pt-5 ${!toggle && "hidden"} lg:block fixed left-0 h-full ${toggle && "block w-full z-10"}`}>
+    <div className={`bg-primary text-secondary w-60 pr-3 pt-5 ${!toggle && "hidden"} lg:block fixed z-20 left-0 h-full ${toggle && "block w-full z-20"}`}>
       <div className="w-full flex justify-center">
         <div className="relative h-20 w-20 rounded-full overflow-hidden">
           <Image 
