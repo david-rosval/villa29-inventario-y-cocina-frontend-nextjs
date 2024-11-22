@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
 import React, { useState, useRef } from 'react';
@@ -85,14 +87,15 @@ const Menu: React.FC = () => {
                         
                         <Image
                           className="mb-72"
-                          src="/pag-1.png"
-                          alt="Cover"
+                          src={image}
+                          alt={`Page ${index+2}`}
                           width={1000} // Ajusta estos valores según tus necesidades
                           height={1000}
                           style={{ width: '100%', height: '100%' }}
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
                           }}
+                          onLoad={() => handleFlip(index+1)}
                           priority // Opcional: usa esto si quieres que se cargue de inmediato
                         />
                     </div>
