@@ -12,7 +12,8 @@ import { UserContext } from "../ordenes/UserProvider"
 
 function UserSideBar({ toggle }: { toggle?: boolean }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { user }: any = useContext(UserContext)
+  const { user, setToggleSideBar }: any = useContext(UserContext)
+
 
   const pathname = usePathname()
 
@@ -33,6 +34,7 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
           href={"/"} 
         >
           <Button 
+            onClick={() => setToggleSideBar(false)}
             variant="outline"
             className={`${pathname === "/" ? 'bg-secondary text-primary hover:bg-secondary hover:text-primary' : 'bg-primary text-secondary hover:bg-primary hover:text-secondary'} w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14`}
           >
@@ -45,6 +47,7 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
           href={"/ordenes/"} 
         >
           <Button 
+            onClick={() => setToggleSideBar(false)}
             variant="outline"
             className={`${pathname === "/ordenes" ? 'bg-secondary text-primary hover:bg-secondary hover:text-primary' : 'bg-primary text-secondary hover:bg-primary hover:text-secondary'} w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14`}
           >
@@ -58,6 +61,7 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
             href={"/ordenes/dashboard"} 
           >
             <Button 
+              onClick={() => setToggleSideBar(false)}
               variant="outline"
               className={`${pathname === "/ordenes/dashboard" ? 'bg-secondary text-primary hover:bg-secondary hover:text-primary' : 'bg-primary text-secondary hover:bg-primary hover:text-secondary'} w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14`}
             >
@@ -71,7 +75,10 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
         <Button 
           variant="outline"
           className={`bg-primary text-secondary w-full rounded-none rounded-r-full flex justify-start gap-3 border-none min-h-14 hover:bg-primary hover:text-secondary`}
-          onClick={() => logout()}
+          onClick={() => {
+            setToggleSideBar(false)
+            logout()
+          }}
         >
           <ExitIcon className="h-5 w-5" />
           <p className="text-lg">Cerrar sesión</p>
