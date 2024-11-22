@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const Menu: React.FC = () => {
     
@@ -19,6 +20,7 @@ const Menu: React.FC = () => {
     ];
 
     const [, setCurrentPage] = useState(0);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const flipBookRef = useRef<any>(null);
 
     const handleFlip = (index: number) => {
@@ -51,56 +53,65 @@ const Menu: React.FC = () => {
             <div className="blur-background" />
             
             <HTMLFlipBook
-                width={260}
-                height={530}
-                ref={flipBookRef}
-                className="flipbook -mb-80 md:mb-4 overflow-hidden"
-                style={{ transition: 'margin 0.3s', position: 'relative' }}
-                maxWidth={600}
-                maxHeight={800}
-                showCover={true}
-                onFlip={(e) => handleFlip(e.data)}
+              width={260}
+              height={530}
+              ref={flipBookRef}
+              className="flipbook -mb-80 md:mb-4 overflow-hidden"
+              style={{ transition: 'margin 0.3s', position: 'relative' }}
+              maxWidth={600}
+              maxHeight={800}
+              showCover={true}
+              onFlip={(e) => handleFlip(e.data)} 
             >
                 {/* portada del flipbook */}
                 <div className="demoPage">
-                    <img
-                        className='mb-72'
-                        src="/pag-1.png"
-                        alt="Cover"
-                        style={{ width: '100%', height: '100%' }}
-                        onError={(e) => {
-                            e.currentTarget.src = '/pag-1.png';
-                        }}
-                    />
+                  <Image
+                    className="mb-72"
+                    src="/pag-1.png"
+                    alt="Cover"
+                    width={1000} // Ajusta estos valores según las dimensiones de la imagen
+                    height={1000}
+                    style={{ width: '100%', height: '100%' }}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
+                    }}
+                    priority // Opcional, para cargar la imagen con mayor prioridad
+                  />
                 </div>
 
                 {/* paginas del flipbook */}
                 {images.slice(1, -1).map((image, index) => (
                     <div className="demoPage" key={index}>
-                        <img
-                            className='mb-72'
-                            src={image}
-                            alt={`Page ${index + 2}`}
-                            style={{ width: '100%', height: '100%' }}
-                            onError={(e) => {
-                                e.currentTarget.src = '/pag-1.png';
-                            }}
-                            onLoad={() => handleFlip(index + 1)}
+                        
+                        <Image
+                          className="mb-72"
+                          src="/pag-1.png"
+                          alt="Cover"
+                          width={1000} // Ajusta estos valores según tus necesidades
+                          height={1000}
+                          style={{ width: '100%', height: '100%' }}
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
+                          }}
+                          priority // Opcional: usa esto si quieres que se cargue de inmediato
                         />
                     </div>
                 ))}
 
                 {/* contraporatada */}
                 <div className="demoPage">
-                    <img
-                        className='mb-72'
-                        src="/pag-8.png"
-                        alt="Back Cover"
-                        style={{ width: '100%', height: '100%' }}
-                        onError={(e) => {
-                            e.currentTarget.src = '/pag-1.png';
-                        }}
-                    />
+                  <Image
+                    className="mb-72"
+                    src="/pag-8.png"
+                    alt="Back Cover"
+                    width={1000} // Ajusta estos valores según el tamaño de tu imagen
+                    height={1000}
+                    style={{ width: '100%', height: '100%' }}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
+                    }}
+                    priority // Opcional, para priorizar la carga
+                  />
                 </div>
             </HTMLFlipBook>
 
