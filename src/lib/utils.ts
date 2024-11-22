@@ -192,6 +192,9 @@ type DashboardInfo = {
   gananciaTotal: number
   totalPedidos: number
   entregados: number
+  crecimientoMensual: number
+  topProductos: TopMenuItem[]
+  topCategorias: CategoriaGanancia[]
 }
 
 type IngresoDiario = {
@@ -227,12 +230,21 @@ export function dashboardInfo(pedidos: any[]): DashboardInfo {
   // Objeto donde guardaremos la suma de los ingresos por día
   const ingresoPorDia: { [key: string]: number } = {};
 
+
+  // para calculo de cresimiento mensual
+  const ingresosPorMesCrecMensual: { [mes: string]: number } = {};
+
+
+  let crecimientoMensual
+
   // Recorremos todos los pedidos
   pedidos.forEach(pedido => {
     // Extraemos el mes del pedido (formato dd/mm/yyyy)
     const fechaCompleta = pedido.fecha
     const fecha = fechaCompleta.split('/');
 
+    const [, mm, yyyy] = fecha.map(Number);
+    const keyMes = `${yyyy}-${mm.toString().padStart(2, '0')}`; // Formato "yyyy-mm"
 
     const mes = parseInt(fecha[1]) - 1;  // Restamos 1 porque el índice de los meses comienza en 0
     
@@ -250,7 +262,10 @@ export function dashboardInfo(pedidos: any[]): DashboardInfo {
       ingresoPorDia[fechaCompleta] = pedido.precioTotal;
     }
 
-    
+    if (!ingresosPorMesCrecMensual[keyMes]) {
+      ingresosPorMesCrecMensual[keyMes] = 0;
+    }
+    ingresosPorMesCrecMensual[keyMes] += pedido.precioTotal;
   });
 
   // Convertimos el objeto de ganancias en un arreglo de objetos con mes y gananciaMensual
@@ -280,6 +295,155 @@ export function dashboardInfo(pedidos: any[]): DashboardInfo {
   // Calcular la ganancia total
   const gananciaTotal =  pedidos.reduce((total, pedido) => total + pedido.precioTotal, 0);
 
-  return { gananciaMensual, gananciaDiaria, entregaPromedio, gananciaTotal, totalPedidos, entregados };
+  // Ordenar los meses en orden cronológico
+  const mesesOrdenados = Object.keys(ingresosPorMesCrecMensual).sort();
+
+  // Calcular el ingreso del mes actual y el mes anterior más cercano
+  const ingresoMesActual = ingresosPorMesCrecMensual[mesesOrdenados[mesesOrdenados.length - 1]];
+  let ingresoMesAnteriorMasCercano = 0;
+
+  // Buscar el ingreso del mes anterior más cercano que no sea el mes actual
+  for (let i = mesesOrdenados.length - 2; i >= 0; i--) {
+    const mesAnterior = mesesOrdenados[i];
+    if (ingresosPorMesCrecMensual[mesAnterior]) {
+      ingresoMesAnteriorMasCercano = ingresosPorMesCrecMensual[mesAnterior];
+      break;
+    }
+  }
+
+  if (mesesOrdenados.length < 2 || ingresoMesAnteriorMasCercano === 0) {
+    crecimientoMensual = 0;
+  } else {
+    crecimientoMensual = ((ingresoMesActual - ingresoMesAnteriorMasCercano) / ingresoMesAnteriorMasCercano) * 100;
+  }
+
+  const topProductos = obtenerTopMenuItems(pedidos);
+
+  const topCategorias = calcularGananciasPorCategoria(pedidos);
+
+  return { 
+    gananciaMensual, 
+    gananciaDiaria, 
+    entregaPromedio, 
+    gananciaTotal, 
+    totalPedidos, 
+    entregados, 
+    crecimientoMensual, 
+    topProductos, 
+    topCategorias 
+  };
 }
 
+type TopMenuItem = {
+  nombre: string;
+  totalCantidad: number;
+  totalGanancia: number;
+};
+
+function obtenerTopMenuItems(pedidos: any[]): TopMenuItem[] {
+  const menuItemMap: Map<string, TopMenuItem> = new Map();
+
+  // Recorrer los pedidos y acumular cantidad y ganancia por item
+  pedidos.forEach((pedido) => {
+    pedido.pedidos.forEach(({ menuItem, cantidad }: { menuItem: { nombre: string; precio: number }, cantidad: number }) => {
+      const { nombre, precio } = menuItem;
+      const totalGanancia = cantidad * precio;
+
+      if (menuItemMap.has(nombre)) {
+        const item = menuItemMap.get(nombre)!;
+        item.totalCantidad += cantidad;
+        item.totalGanancia += totalGanancia;
+      } else {
+        menuItemMap.set(nombre, {
+          nombre,
+          totalCantidad: cantidad,
+          totalGanancia,
+        });
+      }
+    });
+  });
+
+  // Convertir el Map a un arreglo y ordenar por la cantidad de pedidos
+  const topMenuItems = Array.from(menuItemMap.values())
+    .sort((a, b) => b.totalCantidad - a.totalCantidad)
+    .slice(0, 10);
+
+  return topMenuItems;
+}
+
+interface CategoriaGanancia {
+  categoria: string;
+  gananciaTotal: number;
+}
+
+function calcularGananciasPorCategoria(ordenes: any[]): CategoriaGanancia[] {
+  const gananciasPorCategoria: Record<string, number> = {};
+
+  ordenes.forEach((orden) => {
+    orden.pedidos.forEach((pedido: { menuItem: { categoria: string; precio: number }; cantidad: number }) => {
+      const categoria = pedido.menuItem.categoria;
+      const ganancia = pedido.menuItem.precio * pedido.cantidad;
+
+      if (gananciasPorCategoria[categoria]) {
+      gananciasPorCategoria[categoria] += ganancia;
+      } else {
+      gananciasPorCategoria[categoria] = ganancia;
+      }
+    });
+  });
+
+  return Object.entries(gananciasPorCategoria).map(([categoria, gananciaTotal]) => ({
+    categoria,
+    gananciaTotal,
+  }));
+}
+
+type GananciaPorCategoria = {
+  categoria: string;
+  gananciaTotal: number;
+};
+
+type ChartConfig = {
+  [key: string]: {
+    label: string;
+    color?: string;
+  };
+};
+
+export function generarChartConfig(datos: GananciaPorCategoria[]): ChartConfig {
+  return datos.reduce<ChartConfig>(
+    (config, { categoria }) => {
+      // Convertir la categoría a formato camelCase para usar como clave
+      const clave = categoria
+        .replace(/ /g, "") // Eliminar espacios
+        .replace(/[ÁÉÍÓÚáéíóú]/g, (match) => {
+          // Reemplazar caracteres acentuados
+          const map: Record<string, string> = {
+            á: "a",
+            é: "e",
+            í: "i",
+            ó: "o",
+            ú: "u",
+            Á: "A",
+            É: "E",
+            Í: "I",
+            Ó: "O",
+            Ú: "U",
+          };
+          return map[match];
+        })
+        .replace(/^[A-Z]/, (match) => match.toLowerCase()); // Convertir la primera letra a minúscula
+
+      config[clave] = {
+        label: categoria,
+        color: "hsl(var(--primary))",
+      };
+      return config;
+    },
+    {
+      gananciaTotal: {
+        label: "Ganancia",
+      },
+    }
+  );
+}

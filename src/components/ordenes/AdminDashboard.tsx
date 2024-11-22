@@ -6,22 +6,29 @@ import Ingresos from "../dashboard/Ingresos"
 import PromedioEntrega from "../dashboard/PromedioEntrega"
 import GananciasTotales from "../dashboard/GananciasTotales"
 import TotalEntregados from "../dashboard/TotalEntregados"
+import CrecimientoMensual from "../dashboard/CrecimientoMensual"
+import TopProductos from "../dashboard/TopProductos"
+import TopCategorias from "../dashboard/TopCategorias"
+//import { Card } from "../ui/card"
 
 export default async function AdminDashboard() {
   const ordenes = await getOrdenes()
 
-  const { gananciaMensual, gananciaDiaria, entregaPromedio, gananciaTotal, totalPedidos, entregados } = dashboardInfo(ordenes)
+  const { gananciaMensual, gananciaDiaria, entregaPromedio, gananciaTotal, totalPedidos, entregados, crecimientoMensual, topProductos, topCategorias } = dashboardInfo(ordenes)
   
   return (
-    <div className="flex flex-col p-16 w-full gap-5">
+    <div className="flex flex-col lg:p-16 p-10 w-full gap-5">
       <h1 className="text-3xl font-semibold">Reportes</h1>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="grid grid-cols-3 grid-rows-2 gap-3">
+      <div className="lg:grid lg:grid-cols-2 flex flex-col gap-3 overflow-auto">
+        <div className="lg:grid lg:grid-cols-2 lg:grid-rows-2 flex flex-col gap-3">
           <PromedioEntrega entregaPromedio={entregaPromedio} />
           <GananciasTotales gananciaTotal={gananciaTotal} />
           <TotalEntregados entregados={entregados} totalPedidos={totalPedidos} />
+          <CrecimientoMensual crecimientoMensual={crecimientoMensual} />
         </div>
         <Ingresos diario={gananciaDiaria} mensual={gananciaMensual} />
+        <TopProductos topProductos={topProductos} /> 
+        <TopCategorias topCategorias={topCategorias} />
       </div>
     </div>
     

@@ -11,8 +11,8 @@ export default function TotalEntregados({ entregados, totalPedidos }: { entregad
       </CardHeader>
       <CardContent className=" flex justify-center items-center h-2/3 ">
         <div className="">
-          <p className="text-4xl font-semibold text-primary/40">
-            <span className="text-4xl font-bold text-primary">
+          <p className="text-3xl font-semibold text-primary/40">
+            <span className="text-3xl font-bold text-primary">
               <NumberTicker value={entregados} />
             </span>
             /{totalPedidos}

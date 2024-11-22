@@ -8,7 +8,7 @@ import Orden from './OrdenMozo'
 import { OrdenesContext } from './OrdenesProvider'
 import { UserContext } from './UserProvider'
 import UserSideBar from '../layouts/UserSideBar'
-import { obtenerPedidosHoyOrdenadosParaMozo } from '@/lib/utils'
+import { obtenerFechaHoraLima, obtenerPedidosHoyOrdenadosParaMozo } from '@/lib/utils'
 
 function MozoOrdenes() {
   const { ordenes } = useContext(OrdenesContext)
@@ -23,7 +23,10 @@ function MozoOrdenes() {
       ) : (
         <div className='p-8 pb-10 mt-[4.5rem] h-full'>
           <div className='flex md:justify-between md:flex-row md:gap-0 gap-5 flex-col mb-5'>
-            <h1 className='text-3xl font-bold'>Todas las órdenes</h1>
+            <div>
+              <h1 className='text-3xl font-bold pb-2'>Órdenes</h1>
+              <p>{obtenerFechaHoraLima()[0]}</p>
+            </div>
             <Link href={"/ordenes/nueva-orden"}>
               <Button className='flex h-12 md:w-48 w-full relative'>
                 <p className='w-full'>Crear Orden</p>
@@ -32,6 +35,11 @@ function MozoOrdenes() {
             </Link>
           </div>
           <div className='mt-8 w-full grid lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))] grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-8 bg-local '>
+            { obtenerPedidosHoyOrdenadosParaMozo(ordenes).length === 0 && (
+              <div className='flex flex-col items-center justify-center w-full h-96'>
+                <p className='text-2xl font-semibold'>No hay órdenes para mostrar</p>
+              </div>
+            )}
             {obtenerPedidosHoyOrdenadosParaMozo(ordenes).map((orden, index: number) => (
               <Orden key={index} orden={orden} i={index} />
             ))}

@@ -12,7 +12,7 @@ export default function PromedioEntrega({ entregaPromedio }: { entregaPromedio: 
       <CardContent className="flex justify-center items-center h-2/3 ">
         <div className="">
           <p className="text-xl font-bold">
-            <span className="text-4xl">
+            <span className="text-3xl">
               <NumberTicker value={parseInt(entregaPromedio.split(':')[1])} />
             </span>
           min</p>
