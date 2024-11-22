@@ -1,0 +1,29 @@
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.arrow {
+    animation: bounce 1s infinite;
+}
+
+
+@media (min-width: 768px) {
+    .arrow-container {
+        display: none;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}

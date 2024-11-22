@@ -1,6 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 @layer base {
   :root {
@@ -68,4 +75,207 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.landing-page-body {
+  color: var(--foreground);
+  background: #000;
+}
+
+.bowlby-one-regular {
+  font-family: "Bowlby One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-lato {
+  font-family: 'Lato', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.font-calistoga {
+   font-family: Calistoga;
+}
+
+.link-super-large {
+  font-size: 42px;
+}
+
+.link-large {
+    font-size: 24px;
+}
+
+.link-small {
+    font-size: 12px;
+}
+
+.icon-location {
+    color: #A711D0;
+}
+
+.card-about-border-radius {
+  border-radius: 48px;
+}
+
+.demoPage {
+    background-color: white;
+    border: 1px solid #ccc; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.flipbook-container {
+    position: relative;
+    transition: transform 0.5s ease, margin 0.5s ease;
+}
+
+.centered {
+    transform: translateX(calc(50vw - 150px));
+}
+
+
+.blur-background {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 55%;
+    width: 570px;
+    height: 580px;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background-color: rgba(107, 114, 128, 0.5);
+    filter: blur(10px);
+}
+
+@media (max-width: 768px) {
+  .demoPage {
+      margin-top: -30%;
+  }
+  .blur-background {
+      top: 60%;
+      width: 300px;
+      height: 570px;
+  }
+}
+
+
+.bounce-animation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+@keyframes subtleBounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-12px);
+  }
+}
+
+.bounce-animation {
+  animation: subtleBounce 1s ease-in-out infinite;
+}
+
+
+.navigation-button {
+  position: absolute;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 32px;
+  font-size: 2rem;
+  transform: translateY(-50%);
+  top: 50%;
+  background-color: #5F605E;
+  border-radius: 50%;
+  padding: 1rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.navigation-button:hover {
+  background-color: black;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+.navigation-button:active {
+  background-color: black;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.7);
+  transform: scale(0.95);
+}
+
+.navigation-button:hover .icon {
+  color: white;
+}
+.navigation-button-left {
+  left: 20%;
+}
+
+.navigation-button-right {
+  right: 20%;
+}
+
+
+@media (max-width: 768px) {
+  .navigation-button {
+      position: absolute;
+      top: 100%;
+      transform: translateY(0);
+      margin-top: 50px;
+  }
+  
+}
+
+
+@keyframes soft-bounce {
+0%, 100% {
+  transform: translateY(0);
+}
+50% {
+  transform: translateY(-8px);
+}
+}
+
+.animate-soft-bounce {
+animation: soft-bounce 1.2s ease-in-out infinite;
+}
+
+.card-effect {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-effect:hover {
+transform: scale(1.05);
+box-shadow: 0 8px 15px rgba(167, 17, 208, 0.4);
+}
+
+
+@keyframes heartbeat {
+  0% {
+      transform: scale(1);
+  }
+  25% {
+      transform: scale(0.9);
+  }
+  50% {
+      transform: scale(1);
+  }
+  75% {
+      transform: scale(0.9);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 3s ease-in-out infinite;
 }

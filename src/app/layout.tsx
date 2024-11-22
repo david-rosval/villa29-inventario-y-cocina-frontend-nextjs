@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Villa 29",
+  title: "Restobar Villa 29",
   description: "Sistema de gestión de inventario y cocina",
 };
+
+const bowlbyOne = localFont({
+  src: "./fonts/BowlbyOne-Regular.woff",
+  variable: "--font-bowlby-one",
+  weight: "400",
+});
 
 export default function RootLayout({
   children,
@@ -14,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body
+        className={`${bowlbyOne.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

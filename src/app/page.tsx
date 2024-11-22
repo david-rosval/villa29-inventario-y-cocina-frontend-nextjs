@@ -1,19 +1,22 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
+
+import Hero from "@/components/landing-page/Hero";
+import About from "@/components/landing-page/About";
+import MostRequested from "@/components/landing-page/MostRequested";
+import Promotions from "@/components/landing-page/Promotions";
+import Ubication from "@/components/landing-page/Ubication";
+import Footer from "@/components/landing-page/Footer";
+import Menu from "@/components/landing-page/Menu";
 
 export default function Home() {
   return (
-    <div>
-        <Image src="/logo-restobar.jpg" alt="Logo" className="mx-auto my-8" width={128} height={128} />
-        
-        <h1 className="text-4xl font-bold text-center mb-4">Bienvenido al Gestor de Pedidos de Villa 29</h1>
-        <p className="text-center mb-8">Un Sistema para facilitar la comunicación entre Atención al Cliente y Cocina</p>
-        <div className="flex justify-center">
-          <Link href="/auth/login">
-            <Button className="mr-4">Iniciar Sesión</Button>
-          </Link>
-        </div>
-      </div>
+    <div className="landing-page-body">
+      <Hero/>
+      <About/>
+      <MostRequested/>
+      <Promotions/>
+      <Ubication/>
+      <Menu/>
+      <Footer/>
+    </div>
   );
 }

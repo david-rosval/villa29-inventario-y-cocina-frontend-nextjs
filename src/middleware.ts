@@ -6,12 +6,7 @@ export function middleware(request: NextRequest) {
   
   const token = request.cookies.get('token')?.value
 
-  //console.log(token)
-  
-  /* if (token && !request.nextUrl.pathname.startsWith('/ordenes')) {
-    return NextResponse.redirect(new URL('/ordenes', request.url))
-  } */
-
+  // SI YA HA INICIADO SESIÓN E INTENTA ACCEDER A LA PÁGINA DE LOGIN, REDIRECCIONAR A LA PÁGINA DE ORDENES
   if (token && request.nextUrl.pathname.startsWith('/auth/login')) {
     return NextResponse.redirect(new URL('/ordenes', request.url))
   }
@@ -20,10 +15,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   } */
 
-  if (!token && !request.nextUrl.pathname.startsWith('/auth/login') && !request.nextUrl.pathname.endsWith('/')) {
+  // SI NO HA INICIADO SESIÓN E INTENTA ACCEDER A UNA PÁGINA QUE NO SEA EL LOGIN O EL ROOT (LANDING PAGE) REDIRECCIONAR A LA PÁGINA DE LOGIN
+  if (!token && !request.nextUrl.pathname.startsWith('/auth/login') && !request.nextUrl.pathname.startsWith('/')) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
-  
+
+  // si no ha iniciado sesión e intenta acceder a una ruta que empiece por /ordenes, redirigir a la página de login
+  if (!token && request.nextUrl.pathname.startsWith('/ordenes')) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
+  }
 }
 
 export const config = {
