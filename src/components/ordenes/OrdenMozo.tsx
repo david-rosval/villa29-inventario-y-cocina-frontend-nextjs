@@ -24,7 +24,7 @@ function Orden({ orden, i }: { orden: Orden, i: number }) {
   
   return (
    
-    <div className={`flex flex-col border-2 ${orden.estado === 'Listo' && 'border-green-300 border-4'} rounded-lg`}>
+    <div className={`flex flex-col border-2 ${orden.estado === 'Listo' && 'border-green-300 border-4'} rounded-lg lg:max-w-[400px]`}>
       <div className="flex justify-between border px-2">
         <p className="uppercase font-semibold">Orden {`${orden.fecha.replace(/\//g, '')}${orden.horaAsignado.replace(/:/g, '')}`}</p>
         <p>{orden.fecha} {orden.horaAsignado}</p>
