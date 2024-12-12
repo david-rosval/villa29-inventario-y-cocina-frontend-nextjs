@@ -6,6 +6,7 @@ import Promotions from "@/components/landing-page/Promotions";
 import Ubication from "@/components/landing-page/Ubication";
 import Footer from "@/components/landing-page/Footer";
 import Menu from "@/components/landing-page/Menu";
+import FloatingWhatsAppIcon from "@/components/landing-page/FloatingWhatsAppIcon";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Ubication/>
       <Menu/>
       <Footer/>
+      <FloatingWhatsAppIcon />
     </div>
   );
 }

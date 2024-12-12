@@ -36,6 +36,16 @@ export default function NuevaOrden() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [toggleOrden, setToggleOrden] = useState(false)
   
+  const [mostrarNota, setMostrarNota] = useState(false);
+  const [nota, setNota] = useState("");
+  
+  const handleAbrirNota = () => setMostrarNota(true);
+
+  const handleCerrarNota = () => {
+    console.log("Nota guardada:", nota); // Puedes manejar aquí la nota ingresada
+    setMostrarNota(false);
+  };
+
   useEffect(() => {
     async function fetchMenu() {
       try {
@@ -95,6 +105,7 @@ export default function NuevaOrden() {
     router.push('/ordenes')
   }
 
+
   return (
     <>
       {toggleSideBar ? (
@@ -147,8 +158,10 @@ export default function NuevaOrden() {
                 </div>
               </div>
               <div className="h-full flex items-end gap-6">
-          
                 <Button onClick={handleEnviarACocina} className="w-full py-3 font-semibold">Enviar</Button>
+                <Button onClick={handleAbrirNota} className="w-full py-3 font-semibold">
+                  Añadir nota
+                </Button>
               </div>
             </div>
           </div>
@@ -203,22 +216,45 @@ export default function NuevaOrden() {
                   <p>Total: S/.{fixPrice(ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0))}</p>
                 </div>
               </div>
-              <div className="flex justify-end gap-6">
-          
-                <Button onClick={handleEnviarACocina} className="w-full py-8 text-xl font-semibold uppercase mr-32">Enviar</Button>
+              <div className="flex justify-end gap-4">
+                <Button onClick={handleEnviarACocina} className="w-1/2 py-4 text-base font-semibold uppercase">Enviar</Button>
+                <Button onClick={handleAbrirNota} className="w-1/2 py-4 text-base font-semibold uppercase">
+                  Añadir nota
+                </Button>
               </div>
             </div>
           </div>
         )}
         {/* Toggle */}
-        <Button variant={toggleOrden ? 'default' : 'secondary'} onClick={() => setToggleOrden(!toggleOrden)} className={`absolute bottom-0 right-0 size-24 rounded-full m-5 lg:hidden border-none p-6 flex items-center justify-center ${!toggleOrden && 'border shadow-lg'}`}>
-
+        <Button variant={toggleOrden ? 'default' : 'secondary'} onClick={() => setToggleOrden(!toggleOrden)} className={`absolute bottom-8 right-0 size-16 rounded-full m-5 lg:hidden border-none p-4 flex items-center justify-center ${!toggleOrden && 'border shadow-lg'}`}>
           <Pencil2Icon className={`size-full ${toggleOrden ? "text-secondary" : "text-primary"}`}  />
         </Button>
       </div>
       )}
     
-      
+      {/* modal para añadir nota */}
+      {mostrarNota && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-11/12 max-w-lg p-6 bg-[#ABA6A6] rounded-lg shadow-md">
+            <h2 className="mb-4 text-lg font-bold uppercase">Orden #{nuevoIdOrden}</h2>
+            <h3 className="mb-8 text-2xl font-semibold uppercase">Nota</h3>
+            <textarea
+              value={nota}
+              onChange={(e) => setNota(e.target.value)}
+              className="w-full h-48 sm:h-72 p-2 mb-6 border resize-none rounded-md bg-[#E0D8D8] focus:outline-none focus:ring-2 focus:ring-black shadow-lg"
+              placeholder="Escribe tu nota aquí..."
+            ></textarea>
+            <div className="flex justify-center">
+              <button
+                onClick={handleCerrarNota}
+                className="w-1/3 py-2 text-black bg-[#8E8E8E] rounded-md hover:bg-[#8A8A8A] shadow-lg"
+              >
+                Aceptar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   ) 
 }

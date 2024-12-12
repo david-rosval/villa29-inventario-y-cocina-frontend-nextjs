@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
         {/* contactos y social media */}
         <div className="flex flex-col items-center md:items-start">
           <h3 className="text-lg font-semibold text-gray-100 mb-4">Contáctanos:</h3>
-          <p>987 280 900</p>
+          <p>937 280 900</p>
           <br />
           {/* iconos de social media */}
           <div className="flex space-x-6 mb-6">

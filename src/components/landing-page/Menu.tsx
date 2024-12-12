@@ -71,13 +71,13 @@ const Menu: React.FC = () => {
                     className="mb-72"
                     src="/pag-1.png"
                     alt="Cover"
-                    width={1000} // Ajusta estos valores según las dimensiones de la imagen
+                    width={1000}
                     height={1000}
                     style={{ width: '100%', height: '100%' }}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
                     }}
-                    priority // Opcional, para cargar la imagen con mayor prioridad
+                    priority
                   />
                 </div>
 
@@ -89,14 +89,14 @@ const Menu: React.FC = () => {
                           className="mb-72"
                           src={image}
                           alt={`Page ${index+2}`}
-                          width={1000} // Ajusta estos valores según tus necesidades
+                          width={1000}
                           height={1000}
                           style={{ width: '100%', height: '100%' }}
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
                           }}
                           onLoad={() => handleFlip(index+1)}
-                          priority // Opcional: usa esto si quieres que se cargue de inmediato
+                          priority
                         />
                     </div>
                 ))}
@@ -107,13 +107,13 @@ const Menu: React.FC = () => {
                     className="mb-72"
                     src="/pag-8.png"
                     alt="Back Cover"
-                    width={1000} // Ajusta estos valores según el tamaño de tu imagen
+                    width={1000}
                     height={1000}
                     style={{ width: '100%', height: '100%' }}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src = '/pag-1.png';
                     }}
-                    priority // Opcional, para priorizar la carga
+                    priority
                   />
                 </div>
             </HTMLFlipBook>
