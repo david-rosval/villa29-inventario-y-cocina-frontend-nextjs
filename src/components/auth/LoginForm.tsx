@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { authenticate } from "@/lib/auth/actions"
+import { PasswordInput } from "../user/password-input"
 
 function LoginForm() {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -55,7 +56,7 @@ function LoginForm() {
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="ej. johndoe123" {...field} />
+                  <PasswordInput placeholder="ej. johndoe123" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

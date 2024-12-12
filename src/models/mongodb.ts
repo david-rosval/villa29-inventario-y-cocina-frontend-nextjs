@@ -57,6 +57,10 @@ const pedidoSchema = new mongoose.Schema({
   precioTotal: {
     type: Number,
     required: true,
+  },
+  nota: {
+    type: String,
+    required: false,
   }
 })
 

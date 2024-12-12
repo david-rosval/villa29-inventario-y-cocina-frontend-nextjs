@@ -14,6 +14,7 @@ import { socket } from "@/socket"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { UserContext } from "@/components/ordenes/UserProvider"
 import UserSideBar from "@/components/layouts/UserSideBar"
+import { toast } from "sonner"
 
 
 
@@ -76,7 +77,7 @@ export default function NuevaOrden() {
   
 
   const handleEnviarACocina = async () => {
-    const orden = {
+    const orden: { fecha: string; horaAsignado: string; pedidos: { menuItem: string; cantidad: number; }[]; precioTotal: number; nota?: string } = {
       fecha: obtenerFechaHoraLima()[0],
       horaAsignado: obtenerFechaHoraLima()[1],
       pedidos: ordenList.map(orden => { 
@@ -87,6 +88,10 @@ export default function NuevaOrden() {
         return pedido
       }),
       precioTotal: ordenList.reduce((acc, item) => acc + (item.cantidad * item.precioUnit), 0)
+    }
+
+    if (nota.trim() !== "") {
+      orden.nota = nota
     }
 
     if (!orden.pedidos.length) {
@@ -246,7 +251,12 @@ export default function NuevaOrden() {
             ></textarea>
             <div className="flex justify-center">
               <button
-                onClick={handleCerrarNota}
+                onClick={() => {
+                  toast("Nota guardada", {
+                    description: "La nota se ha guardado correctamente",
+                  })
+                  handleCerrarNota()
+                }}
                 className="w-1/3 py-2 text-black bg-[#8E8E8E] rounded-md hover:bg-[#8A8A8A] shadow-lg"
               >
                 Aceptar

@@ -23,6 +23,7 @@ export type Orden = {
     _id: string
   }>
   precioTotal: number
+  nota?: string
   _id:string
 }
 

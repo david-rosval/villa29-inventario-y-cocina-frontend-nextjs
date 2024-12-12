@@ -12,7 +12,7 @@ import { ScrollArea } from "../ui/scroll-area"
 function Orden({ orden, i }: { orden: Orden, i: number }) {
   const { setNotificaciones } = useContext(OrdenesContext)
   const [mostrarNota, setMostrarNota] = useState(false) // Estado para controlar el modal de nota
-  const [nota, setNota] = useState('') // Estado para almacenar la nota
+  const [nota] = useState(orden.nota ?? "") // Estado para almacenar la nota
 
   const handleCambiarEstadoListo = async () => {
     try {
@@ -35,7 +35,6 @@ function Orden({ orden, i }: { orden: Orden, i: number }) {
             <h3 className="mb-8 text-2xl font-semibold uppercase">Nota</h3>
             <textarea
               value={nota}
-              onChange={(e) => setNota(e.target.value)}
               className="w-full h-72 p-2 mb-6 border resize-none rounded-md bg-[#E0D8D8] focus:outline-none focus:ring-2 focus:ring-black shadow-lg whitespace-pre-wrap"
               placeholder="Sin notas"
               disabled

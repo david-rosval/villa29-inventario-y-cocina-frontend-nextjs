@@ -9,6 +9,7 @@ import { UserContext } from '@/components/ordenes/UserProvider'
 import axios from 'axios'
 import { socket } from '@/socket'
 import OrdenesProvider from '@/components/ordenes/OrdenesProvider'
+import { toast } from 'sonner'
 
 function Ordenes() {
   const [ordenes, setOrdenes] = useState([])
@@ -43,14 +44,23 @@ function Ordenes() {
 
     socket.on('pedido-listo', () => {
       setNotificaciones((notificaciones) => [...notificaciones, '¡Un pedido está listo!'])
+      toast("¡Un pedido está listo!", {
+        description: "Pedido listo para ser retirado por el mozo"
+      })
     })
 
     socket.on('nuevo-pedido', () => {
       setNotificaciones((notificaciones) => [...notificaciones, '¡Nuevo pedido!'])
+      toast("¡Nuevo pedido!", {
+        description: "Un nuevo pedido ha sido enviado"
+      })
     })
 
     socket.on('pedido-entregado', () => {
       setNotificaciones((notificaciones) => [...notificaciones, 'Pedido entregado!'])
+      toast("Pedido entregado!", {
+        description: "El pedido ha sido entregado al cliente"
+      })
     })
 
     return () => {
