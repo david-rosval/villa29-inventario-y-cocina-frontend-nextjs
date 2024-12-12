@@ -3,8 +3,13 @@ import UserTopBar from "@/components/layouts/UserTopBar"
 import UserProvider from "@/components/ordenes/UserProvider"
 import { getUser } from "@/lib/auth/actions"
 import { User } from "@/lib/types/user"
+import { Metadata } from "next"
 
-export default async function OrdenesLayout({
+export const metadata: Metadata = {
+  title: "Villa 29 • Panel de Control",
+};
+
+export default async function PanelDeControlLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode

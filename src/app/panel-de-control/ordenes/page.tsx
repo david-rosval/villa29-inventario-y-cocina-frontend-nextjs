@@ -2,7 +2,6 @@
 
 "use client"
 
-
 import MozoOrdenes from '@/components/ordenes/MozoOrdenes'
 import CocinaOrdenes from '@/components/ordenes/CocinaOrdenes'
 import { useContext, useEffect, useState } from 'react'
@@ -10,8 +9,6 @@ import { UserContext } from '@/components/ordenes/UserProvider'
 import axios from 'axios'
 import { socket } from '@/socket'
 import OrdenesProvider from '@/components/ordenes/OrdenesProvider'
-
-
 
 function Ordenes() {
   const [ordenes, setOrdenes] = useState([])

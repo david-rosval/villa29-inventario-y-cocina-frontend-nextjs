@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
 
   // SI YA HA INICIADO SESIÓN E INTENTA ACCEDER A LA PÁGINA DE LOGIN, REDIRECCIONAR A LA PÁGINA DE ORDENES
   if (token && request.nextUrl.pathname.startsWith('/auth/login')) {
-    return NextResponse.redirect(new URL('/ordenes', request.url))
+    return NextResponse.redirect(new URL('/panel-de-control', request.url))
   }
   
   /* if (token && request.nextUrl.pathname.startsWith('/')) {
@@ -21,7 +21,7 @@ export function middleware(request: NextRequest) {
   }
 
   // si no ha iniciado sesión e intenta acceder a una ruta que empiece por /ordenes, redirigir a la página de login
-  if (!token && request.nextUrl.pathname.startsWith('/ordenes')) {
+  if (!token && request.nextUrl.pathname.startsWith('/panel-de-control')) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 }

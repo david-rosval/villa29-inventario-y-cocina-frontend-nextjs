@@ -102,7 +102,7 @@ export default function NuevaOrden() {
     } catch (error:any) {
       console.log(error.response)
     } 
-    router.push('/ordenes')
+    router.push('/panel-de-control/ordenes')
   }
 
 
