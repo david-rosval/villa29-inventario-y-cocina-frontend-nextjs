@@ -28,7 +28,7 @@ export async function authenticate(values: { email: string, password: string }) 
   } catch (error:any) {
     console.log(error)
   } finally{
-    redirect('/ordenes')
+    redirect('/panel-de-control')
   }
 }
 

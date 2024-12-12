@@ -26,8 +26,8 @@ function LoginForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    authenticate(values)
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    await authenticate(values)
   }
 
   return (

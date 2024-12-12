@@ -3,5 +3,5 @@ export type User = {
   nombre: string
   apellido: string
   email: string
-  rol: string
+  rol: 'Administrador' | 'Cocinero' | 'Mozo/Cajero'
 }

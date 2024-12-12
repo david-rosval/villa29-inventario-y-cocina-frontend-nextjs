@@ -9,7 +9,7 @@ function Return() {
 
   return (
     <div className="hidden md:block">
-      <Button onClick={() => router.push('/ordenes')} variant="outline" size="icon"  className="rounded-full">
+      <Button onClick={() => router.push('/panel-de-control/ordenes')} variant="outline" size="icon"  className="rounded-full">
         <ArrowLeftIcon className="h-4 w-4" />
       </Button>
     </div>

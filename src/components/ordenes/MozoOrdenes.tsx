@@ -28,7 +28,7 @@ function MozoOrdenes() {
               <h1 className='text-3xl font-bold pb-2'>Órdenes</h1>
               <p>{obtenerFechaHoraLima()[0]}</p>
             </div>
-            <Link href={"/ordenes/nueva-orden"}>
+            <Link href={"/panel-de-control/ordenes/nueva-orden"}>
               <Button className='flex h-12 md:w-48 w-full relative'>
                 <p className='w-full'>Crear Orden</p>
                 <PlusIcon className="h-5 w-5 absolute right-3" />

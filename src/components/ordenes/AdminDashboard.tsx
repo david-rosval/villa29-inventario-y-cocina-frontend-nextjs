@@ -17,7 +17,7 @@ export default async function AdminDashboard() {
   const { gananciaMensual, gananciaDiaria, entregaPromedio, gananciaTotal, totalPedidos, entregados, crecimientoMensual, topProductos, topCategorias } = dashboardInfo(ordenes)
   
   return (
-    <div className="flex flex-col lg:p-16 p-10 w-full gap-5">
+    <div className="flex flex-col lg:p-16 lg:pt-8 p-10 pt-5 w-full gap-5 lg:gap-6">
       <h1 className="text-3xl font-semibold">Reportes</h1>
       <div className="lg:grid lg:grid-cols-2 flex flex-col gap-3 overflow-auto">
         <div className="lg:grid lg:grid-cols-2 lg:grid-rows-2 flex flex-col gap-3">
