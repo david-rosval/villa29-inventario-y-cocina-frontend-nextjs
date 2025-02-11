@@ -1,4 +1,4 @@
-## Backed repository
+## Backend repository
 
 https://github.com/david-rosval/inventario-y-cocina-backend.git
 
