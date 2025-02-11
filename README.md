@@ -1,3 +1,7 @@
+## Backed repository
+
+https://github.com/david-rosval/inventario-y-cocina-backend.git
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
