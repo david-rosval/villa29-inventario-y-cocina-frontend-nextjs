@@ -6,12 +6,13 @@ const Hero = () => {
     return (
         <div className="relative w-full h-screen overflow-hidden">
             <video
-                className="absolute top-0 left-0 w-full h-screen object-cover"
-                src="/video_primera_section.mp4" 
-                autoPlay
-                loop
+                role="video"            
                 muted
+                autoPlay
+                className="absolute top-0 left-0 w-full h-screen object-cover"
+                loop
                 playsInline
+                src="/video_primera_section.mp4" 
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
             <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block">
