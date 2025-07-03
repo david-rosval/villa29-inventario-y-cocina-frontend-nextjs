@@ -70,22 +70,22 @@ const Navbar = () => {
     }, [lastScrollY]);
 
     return (
-        <div className={`relative w-full bowlby-one-regular z-30 bg-black md:bg-transparent transition-all duration-300 ${showNavbar ? 'opacity-100' : 'opacity-0'}`}>
+        <nav className={`relative w-full bowlby-one-regular z-30 bg-black md:bg-transparent transition-all duration-300 ${showNavbar ? 'opacity-100' : 'opacity-0'}`}>
             {/* navbar en dispositivos moviles */}
             <div className={`md:hidden flex items-center justify-between px-4 py-2 bg-transparent z-50 fixed top-0 left-0 right-0 transition-transform duration-300 ${showNavbar ? 'translate-y-0' : '-translate-y-full'}`}>
                 <div className="md:hidden flex-1 text-center">
                     <Image 
                       priority
                       src="/villa29-logo.png" 
-                      alt="Logo"
+                      alt="Logo-mobile"
                       height={96}
                       width={96}
                     />
                 </div>
                 
-                <div onClick={toggleNav} className="text-white cursor-pointer z-50 absolute top-8 right-4">
+                <button onClick={toggleNav} className="text-white cursor-pointer z-50 absolute top-8 right-4" aria-label="Toggle navigation menu">
                     {nav ? <AiOutlineClose size={35} /> : <AiOutlineMenu size={35} />}
-                </div>
+                </button>
             </div>
 
             {/* enlaces de navegacion en dispositivos de escritorio */}
@@ -95,7 +95,7 @@ const Navbar = () => {
                     <Image 
                       priority
                       src="/villa29-logo.png" 
-                      alt="Logo"
+                      alt="Logo-desktop"
                       height={96}
                       width={96}
                       className="md:h-16 md:w-16 mx-auto"
@@ -115,7 +115,7 @@ const Navbar = () => {
                                         </Link>
                                     </div>
                                 ) : (
-                                    <Link href={link.path}>
+                                    <Link href={link.path} className="bowlby-one-regular link-large hover:text-[#A711D0] transition-colors duration-300">
                                         <p className="text-white bowlby-one-regular hover:text-[#A711D0] transition-colors duration-300">{link.title}</p>
                                     </Link>
                                 )}
@@ -131,6 +131,7 @@ const Navbar = () => {
                 animate={nav ? 'open' : 'closed'}
                 variants={menuVariants}
                 className="md:hidden fixed left-0 top-0 w-full h-full z-40 bg-black flex flex-col items-center text-white"
+                role="menu"
             >
                 <ul className="text-4xl mt-32 mb-8 text-center space-y-2">
                     {navLinks.map((link, index) => (
@@ -176,7 +177,7 @@ const Navbar = () => {
                     ¿Cómo llegar a Villa29?
                 </a>
             </motion.div>
-        </div>
+        </nav>
     );
 };
 
