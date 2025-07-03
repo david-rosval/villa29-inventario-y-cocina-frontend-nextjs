@@ -63,13 +63,13 @@ const Footer: React.FC = () => {
           <br />
           {/* iconos de social media */}
           <div className="flex space-x-6 mb-6">
-            <a href="https://www.facebook.com/share/9372ZJLM7Ju2ewzZ/" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
-              <FaFacebook size={30} />
+            <a href="https://www.facebook.com/share/9372ZJLM7Ju2ewzZ/" aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
+              <FaFacebook size={30}  />
             </a>
-            <a href="https://www.instagram.com/villa29restobar/" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
+            <a href="https://www.instagram.com/villa29restobar/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
               <FaInstagram size={30} />
             </a>
-            <a href="https://www.tiktok.com/@villa29_restobar?_t=8quIkiMBMRS&_r=1" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
+            <a href="https://www.tiktok.com/@villa29_restobar?_t=8quIkiMBMRS&_r=1" aria-label="Tiktok" target="_blank" rel="noopener noreferrer" className="transition-colors duration-300 hover:text-[#000000]">
               <FaTiktok size={30} />
             </a>
           </div>
