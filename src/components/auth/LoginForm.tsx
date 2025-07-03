@@ -17,8 +17,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { authenticate } from "@/lib/auth/actions"
 import { PasswordInput } from "../user/password-input"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 function LoginForm() {
+  const router = useRouter()
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,7 +31,13 @@ function LoginForm() {
   })
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
-    await authenticate(values)
+    const result = await authenticate(values)
+    if (!result.success) {
+      toast.error(result.message)
+      return
+    }
+    toast.success("Sesión iniciada")
+    router.push('/panel-de-control')
   }
 
   return (
