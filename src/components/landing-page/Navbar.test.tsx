@@ -37,6 +37,6 @@ describe('Navbar Component', () => {
     const toggleButton = screen.getByRole('button', { name: /toggle navigation menu/i });
     fireEvent.click(toggleButton);
     const mobileMenu = screen.getByRole('menu');
-    expect(mobileMenu).toBeInTheDocument();
+    expect(mobileMenu).toBeInTheDocument(); 
   });
 });
