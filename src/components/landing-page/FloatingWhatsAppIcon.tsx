@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import React from "react";
 
 const FloatingWhatsAppIcon: React.FC = () => {
@@ -24,10 +25,11 @@ const FloatingWhatsAppIcon: React.FC = () => {
 
       {/* icono */}
       <div className="bg-green-500 rounded-full hover:bg-green-600 flex items-center shadow-[0px_0px_40px_rgba(255,255,255,0.8)] justify-center w-12 h-12 sm:w-16 sm:h-16">
-        <img
+        <Image
           src="/whatsapp-icon.svg"
           alt="WhatsApp"
           className="w-6 h-6 sm:w-8 sm:h-8"
+          fill
         />
       </div>
     </div>
