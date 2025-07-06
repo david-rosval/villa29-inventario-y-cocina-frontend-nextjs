@@ -11,14 +11,14 @@ export default function AuthLayout({
   return (
     <div className="h-dvh bg-primary flex justify-center items-center relative overflow-hidden md:p-0 p-4">
       {/* Elipse superior */}
-      <div className="absolute top-[-80px] left-[-80px] opacity-90">
+      <div className="absolute top-[-80px] left-[-80px] opacity-90" role="presentation">
         <div className="relative w-[500px] h-[550px] ">
           <div className="absolute top-0 left-0 bg-none h-[350px] w-[350px] rounded-full border-[40px] border-secondary" />
           <div className="absolute bottom-0 right-4 bg-none h-[350px] w-[350px] rounded-full border-[40px] border-secondary" />
         </div>
       </div>
       {/* Elipse inferior */}
-      <div className="absolute bottom-[-80px] right-[-80px] opacity-90">
+      <div className="absolute bottom-[-80px] right-[-80px] opacity-90" role="presentation">
         <div className="relative w-[500px] h-[550px] ">
           <div className="absolute top-0 left-0 bg-none h-[350px] w-[350px] rounded-full border-[40px] border-secondary" />
           <div className="absolute bottom-0 right-4 bg-none h-[350px] w-[350px] rounded-full border-[40px] border-secondary" />
@@ -35,7 +35,9 @@ export default function AuthLayout({
         </div>
         <Card className="md:w-[450px] w-full mb-10 pt-8 pb-10 md:px-14 px-2">
           <CardHeader>
-            <CardTitle className="text-xl text-center">Inicio de Sesión</CardTitle>
+            <CardTitle className="text-xl text-center">
+              <h1>Inicio de Sesión</h1>
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {children}

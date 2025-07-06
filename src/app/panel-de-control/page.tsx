@@ -2,7 +2,7 @@
 
 import UserSideBar from '@/components/layouts/UserSideBar'
 import { UserContext } from '@/components/ordenes/UserProvider'
-import PanelDeControlComponent from '@/components/panel-de-control/PanelDeControl'
+import PanelDeControlComponent from '@/components/panel-de-control/PanelDeControlComponent'
 import React, { useContext } from 'react'
 
 export default function PanelDeControl() {

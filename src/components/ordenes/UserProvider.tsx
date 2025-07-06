@@ -2,7 +2,7 @@
 
 import { createContext, useState } from "react"
 
-type UserContextType = {
+export type UserContextType = {
   user: {
     id_usuario: string
     nombre: string
