@@ -26,7 +26,7 @@ export async function authenticate(values: { email: string, password: string }) 
     return { success: true, message: 'Inicio de sesión exitoso' }
   } catch (error: unknown) {
     if (isAxiosError(error)) {
-      console.log(error.response?.data)
+      console.log("Error de axios",error.response?.data)
       return { success: false, message: error.response?.data?.error || 'Error al iniciar sesión' }
     } else {
       console.error('Error inesperado:', error)
@@ -49,6 +49,6 @@ export async function getUser(): Promise<User | undefined>  {
     return user
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error:any) {
-    console.log({ error: 'Error obteniendo perfil del usuario' })
+    console.log('Error obteniendo perfil del usuario', error)
   }
 }
