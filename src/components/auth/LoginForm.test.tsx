@@ -3,7 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 
-import { toastSuccessMock, toastErrorMock } from "../../../__mocks__/toast";
+import { toastSuccessMock, toastErrorMock } from "../../__mocks__/toast";
 
 const pushMock = jest.fn();
 
