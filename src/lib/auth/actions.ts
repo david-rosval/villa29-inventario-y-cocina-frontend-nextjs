@@ -22,7 +22,8 @@ const client = axios.create({
 export async function authenticate(values: { email: string, password: string }) {
   try {
     const response: AxiosResponse = await client.post('/auth/login', values)
-    cookies().set('token', response.data.token)
+    const obtainedCookies = await cookies()
+    obtainedCookies.set('token', response.data.token)
     return { success: true, message: 'Inicio de sesión exitoso' }
   } catch (error: unknown) {
     if (isAxiosError(error)) {
@@ -36,14 +37,15 @@ export async function authenticate(values: { email: string, password: string }) 
 }
 
 export async function logout() {
-  cookies().delete('token')
+  (await cookies()).delete('token')
   redirect('/')
 }
 
 export async function getUser(): Promise<User | undefined>  {
+  const token = (await cookies()).get('token')?.value;
   try {
     const response: AxiosResponse = await client.get('/auth/profile', {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const user: User = response.data
     return user
