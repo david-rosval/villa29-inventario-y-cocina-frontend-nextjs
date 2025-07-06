@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use server"
 
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { User } from '../types/user';
@@ -22,13 +22,10 @@ const client = axios.create({
 export async function authenticate(values: { email: string, password: string }) {
   try {
     const response: AxiosResponse = await client.post('/auth/login', values)
-    console.log('Respuesta del servidor:', response.data)
-    //console.log(response.data)
     cookies().set('token', response.data.token)
-    console.log('Token guardado en cookies:', cookies().get('token')?.value)
     return { success: true, message: 'Inicio de sesión exitoso' }
   } catch (error: unknown) {
-    if (error instanceof AxiosError) {
+    if (isAxiosError(error)) {
       console.log(error.response?.data)
       return { success: false, message: error.response?.data?.error || 'Error al iniciar sesión' }
     } else {
