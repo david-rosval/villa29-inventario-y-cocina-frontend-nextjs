@@ -32,7 +32,7 @@ export default function TopCategorias({ topCategorias }: { topCategorias: any[] 
         <CardTitle>Ventas según Categorías de productos</CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} data-testid="chart-container">
           <BarChart
             accessibilityLayer
             data={topCategorias}
