@@ -23,9 +23,10 @@ const client = axios.create({
 
 
 export async function getAllUsers(): Promise<Array<User> | undefined> {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.get('/usuarios', {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     console.log("Todos los usuarios obtenidos")
     const users: Array<User> = response.data
@@ -37,9 +38,10 @@ export async function getAllUsers(): Promise<Array<User> | undefined> {
 }
 
 export async function getUserById({ id }: { id: string }) {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.get(`/usuarios/${id}`, {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const user: User = response.data
     return user
@@ -51,9 +53,10 @@ export async function getUserById({ id }: { id: string }) {
 export async function registerUser({ 
   newUser 
 }: { newUser: Omit<User, 'id_usuario'> & { password: string } }) {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.post(`/usuarios`, newUser, {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const user: User = response.data
     return user
@@ -63,9 +66,10 @@ export async function registerUser({
 }
 
 export async function updateUser({ id, updatedUser }: { id: string, updatedUser: Omit<User, 'id_usuario'> }) {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.put(`/usuarios/${id}`, updatedUser, {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const user: User = response.data
     return user
@@ -75,9 +79,10 @@ export async function updateUser({ id, updatedUser }: { id: string, updatedUser:
 }
 
 export async function updateUserPassword({ id, password, newPassword }: { id: string, password: string, newPassword: string }) {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.put(`/usuarios/new-password/${id}`, { password, newPassword }, {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const user: User = response.data
     return user
@@ -87,9 +92,10 @@ export async function updateUserPassword({ id, password, newPassword }: { id: st
 }
 
 export async function deleteUser({ ids }: { ids: Array<string> }) {
+  const token = (await cookies()).get('token')?.value
   try {
     const response: AxiosResponse = await client.post(`/usuarios/delete`, { ids: ids }, {
-      headers: { 'authorization': cookies().get('token')?.value } 
+      headers: { 'authorization': token } 
     })
     const { message } = response.data
     if (message) {
