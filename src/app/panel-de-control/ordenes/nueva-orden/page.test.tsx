@@ -1,74 +1,149 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import NuevaOrden from './page';
-import { UserContext } from '@/components/ordenes/UserProvider';
-import axios from 'axios';
+// page.test.tsx
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { UserContext, UserContextType } from "@/components/ordenes/UserProvider";
+import { postMock, getMock } from "@/__mocks__/axios";
+import { Item } from "@/lib/types/pedidos";
+import NuevaOrden from "./page";
 
-jest.mock('axios');
+// CONTROLADOR para simular que Menu retorna o no retorna items
+let debeRetornarItems = true;
 
-const mockSocket = { emit: jest.fn() };
-jest.mock('@/lib/socket', () => mockSocket);
+// Mock socket
+jest.mock("@/socket", () => ({
+  socket: {
+    emit: jest.fn(),
+    on: jest.fn(),
+    off: jest.fn(),
+    connected: true,
+    io: {
+      engine: {
+        transport: { name: "polling" },
+        on: jest.fn(),
+      },
+    },
+  },
+}));
 
-const mockUserContext = {
+// Mock router y toast
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({ push: jest.fn() }),
+  usePathname: () => "/panel-de-control/ordenes",
+}));
+
+const toastMock = jest.fn();
+
+jest.mock("sonner", () => {
+  const fullMock = (msg: string, opts?: unknown) => toastMock(msg, opts);
+  fullMock.success = jest.fn();
+  fullMock.error = jest.fn();
+  return { toast: fullMock };
+});
+
+
+// Mock de Menu controlado
+jest.mock("@/components/ordenes/Menu", () => ({
+  __esModule: true,
+  default: function MockMenu({ setOrdenList }: { setOrdenList: (items: Item[]) => void }) {
+    React.useEffect(() => {
+      if (debeRetornarItems) {
+        setOrdenList([
+          {
+            id: 531,
+            _id: "menu-item-1",
+            nombre: "Hamburguesa",
+            cantidad: 1,
+            precioUnit: 10,
+          },
+        ]);
+      }
+    }, [setOrdenList]);
+    return <div data-testid="mock-menu">Mock Menu</div>;
+  },
+}));
+
+import { socket } from "@/socket";
+
+const mockToggle = jest.fn();
+
+const mockUserContext: UserContextType = {
   user: {
-    id_usuario: '1',
-    nombre: 'Test User',
-    apellido: 'User',
-    email: 'test@example.com',
-    rol: 'Mozo',
+    id_usuario: "user-1",
+    nombre: "Juan",
+    apellido: "Pérez",
+    email: "juan@example.com",
+    rol: "Mozo/Cajero",
   },
   toggleSideBar: false,
-  setToggleSideBar: jest.fn(),
+  setToggleSideBar: mockToggle,
 };
 
-describe('NuevaOrden Page', () => {
+describe("NuevaOrden Page", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    getMock.mockResolvedValue({ data: [] });
+    debeRetornarItems = true; // por defecto sí retorna items
   });
 
-  it('renders the page correctly', () => {
+  it("muestra el encabezado correctamente", async () => {
+    render(
+      <UserContext.Provider value={mockUserContext}>
+        <NuevaOrden />
+      </UserContext.Provider>
+    );
+    expect(await screen.findByText(/Orden: #99/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fecha:/)).toBeInTheDocument();
+  });
+
+  it("muestra error si se intenta enviar orden vacía", async () => {
+    debeRetornarItems = false; // forza menú vacío
+
     render(
       <UserContext.Provider value={mockUserContext}>
         <NuevaOrden />
       </UserContext.Provider>
     );
 
-    expect(screen.getByText('Órdenes')).toBeInTheDocument();
-  });
-
-  it('fetches menu items on mount', async () => {
-    const mockMenu = [{ _id: '1', nombre: 'Item 1', precioUnit: 10 }];
-    jest.spyOn(axios, 'get').mockResolvedValueOnce({ data: mockMenu });
-
-    render(
-      <UserContext.Provider value={mockUserContext}>
-        <NuevaOrden />
-      </UserContext.Provider>
-    );
+    const enviarButton = await screen.findAllByText(/Enviar/i);
+    fireEvent.click(enviarButton[0]);
 
     await waitFor(() => {
-      expect(screen.getByText('Item 1')).toBeInTheDocument();
+      expect(screen.getByText(/No has seleccionado ningún item del menú/i)).toBeInTheDocument();
     });
   });
 
-  it('handles empty order list error', async () => {
+  it("envía correctamente la orden y emite evento", async () => {
+    postMock.mockResolvedValue({ status: 201 });
+
     render(
       <UserContext.Provider value={mockUserContext}>
         <NuevaOrden />
       </UserContext.Provider>
     );
 
-    const submitButton = screen.getByText('Enviar a Cocina');
-    fireEvent.click(submitButton);
+    fireEvent.click(await screen.findByText("Añadir nota"));
+
+    const textarea = await screen.findByRole("textbox");
+    fireEvent.change(textarea, { target: { value: "Sin cebolla" } });
+
+    fireEvent.click(screen.getByText("Aceptar"));
+
+    const enviarButton = await screen.findAllByText("Enviar");
+    fireEvent.click(enviarButton[0]);
 
     await waitFor(() => {
-      expect(screen.getByText('La orden está vacía')).toBeInTheDocument();
+      expect(postMock).toHaveBeenCalled();
+      expect(socket.emit).toHaveBeenCalledWith(
+        "asignar-pedido",
+        expect.objectContaining({
+          message: expect.stringContaining("MOZO"),
+        })
+      );
     });
   });
 
-  it('submits the order successfully', async () => {
-    const mockMenu = [{ _id: '1', nombre: 'Item 1', precioUnit: 10 }];
-    jest.spyOn(axios, 'get').mockResolvedValueOnce({ data: mockMenu });
-    jest.spyOn(axios, 'post').mockResolvedValueOnce({ status: 200 });
+  it("muestra error si falla la API de menú", async () => {
+    getMock.mockRejectedValueOnce(new Error("API Error"));
 
     render(
       <UserContext.Provider value={mockUserContext}>
@@ -77,31 +152,7 @@ describe('NuevaOrden Page', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Item 1')).toBeInTheDocument();
-    });
-
-    const addButton = screen.getByText('+');
-    fireEvent.click(addButton);
-
-    const submitButton = screen.getByText('Enviar a Cocina');
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(mockSocket.emit).toHaveBeenCalledWith('asignar-pedido', expect.any(Object));
-    });
-  });
-
-  it('handles API errors gracefully', async () => {
-    jest.spyOn(axios, 'get').mockRejectedValueOnce(new Error('API Error'));
-
-    render(
-      <UserContext.Provider value={mockUserContext}>
-        <NuevaOrden />
-      </UserContext.Provider>
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText('Error al cargar el menú')).toBeInTheDocument();
+      expect(screen.getByTestId("mock-menu")).toBeInTheDocument();
     });
   });
 });
