@@ -12,7 +12,7 @@ export default  function UserTopBar() {
   
   return (
     <div className={`w-full bg-primary py-3 lg:px-5 flex justify-between lg:justify-end items-center h-[4.5rem] fixed top-0 z-10 lg:pr-60`}>
-      <Button onClick={() => setToggleSideBar(!toggleSideBar)} size="icon" className="lg:hidden ml-5">
+      <Button onClick={() => setToggleSideBar(!toggleSideBar)} size="icon" className="lg:hidden ml-5" aria-label="Toggle sidebar">
         <HamburgerMenuIcon className="size-8" />
       </Button>
       <div className="flex gap-8 items-center pr-6">

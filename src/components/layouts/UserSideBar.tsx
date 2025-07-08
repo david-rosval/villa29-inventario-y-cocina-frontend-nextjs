@@ -97,6 +97,7 @@ function UserSideBar({ toggle }: { toggle?: boolean }) {
             setToggleSideBar(false)
             logout()
           }}
+          aria-label="Cerrar sesión"
         >
           <LogOut className="h-5 w-5" />
           <p className="text-lg">Cerrar sesión</p>
