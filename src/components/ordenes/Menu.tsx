@@ -134,9 +134,9 @@ function MenuItemCard({ item, handleFunction }: { item: MenuItem, handleFunction
             <p className="text-opacity-50 text-lg text-wrap">S/. { item.precio.toFixed(2) }</p>
           </div>
           
-          <Button variant="outline" size="icon" onClick={() => handleFunction(item)} className="rounded-full">
+          <Button variant="outline" size="icon" onClick={() => handleFunction(item)} className="rounded-full" aria-label={`Order ${item.nombre}`}>
               <PlusIcon className="h-6 w-6" />
-            </Button>
+            </Button> 
         </div>
       
       </div>

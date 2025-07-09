@@ -5,13 +5,12 @@ import Menu from "@/components/ordenes/Menu"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { fixPrice, obtenerFechaHoraLima } from "@/lib/utils"
-import { PlusIcon, MinusIcon, ExclamationTriangleIcon, Pencil2Icon } from "@radix-ui/react-icons"
+import { PlusIcon, MinusIcon, Pencil2Icon } from "@radix-ui/react-icons"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import type { Item } from '@/lib/types/pedidos'
 import { useRouter } from "next/navigation"
 import { socket } from "@/socket"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { UserContext } from "@/components/ordenes/UserProvider"
 import UserSideBar from "@/components/layouts/UserSideBar"
 import { toast } from "sonner"
@@ -95,7 +94,9 @@ export default function NuevaOrden() {
     }
 
     if (!orden.pedidos.length) {
-      setErrorVacio(true)
+      toast.error("No hay pedidos en la orden", {
+        description: "Agrega al menos un pedido antes de enviar a cocina",
+      })
       return
     }
 
@@ -171,15 +172,6 @@ export default function NuevaOrden() {
             </div>
           </div>
           <Menu ordenList={ordenList} setOrdenList={setOrdenList} menu={menu} />
-          {errorVacio && (
-            <Alert variant="destructive" className="m-5 absolute bottom-0 right-0 w-[600px] bg-secondary">
-              <ExclamationTriangleIcon  className="w-4 h-4" />
-              <AlertTitle>Orden vacía</AlertTitle>
-              <AlertDescription>
-                No has seleccionado ningún item del menú
-              </AlertDescription>
-            </Alert>
-          )}
           </>
           
         ) : (
@@ -231,7 +223,7 @@ export default function NuevaOrden() {
           </div>
         )}
         {/* Toggle */}
-        <Button variant={toggleOrden ? 'default' : 'secondary'} onClick={() => setToggleOrden(!toggleOrden)} className={`absolute bottom-8 right-0 size-16 rounded-full m-5 lg:hidden border-none p-4 flex items-center justify-center ${!toggleOrden && 'border shadow-lg'}`}>
+        <Button variant={toggleOrden ? 'default' : 'secondary'} onClick={() => setToggleOrden(!toggleOrden)} className={`absolute bottom-8 right-0 size-16 rounded-full m-5 lg:hidden border-none p-4 flex items-center justify-center ${!toggleOrden && 'border shadow-lg'}`} aria-label="Toggle orden">
           <Pencil2Icon className={`size-full ${toggleOrden ? "text-secondary" : "text-primary"}`}  />
         </Button>
       </div>
@@ -309,6 +301,7 @@ function OrdenItem({item, ordenList, setOrdenList}: {item: Item, ordenList: Item
           variant="outline" 
           onClick={handleMinusButton} 
           className="w-8 rounded-full h-8 p-2"
+          aria-label={`remove 1 ${item.nombre}`}
         >
           <MinusIcon className="size-full" />
         </Button>
@@ -319,6 +312,7 @@ function OrdenItem({item, ordenList, setOrdenList}: {item: Item, ordenList: Item
           variant="outline" 
           onClick={handlePlusButton} 
           className="w-8 rounded-full h-8 p-2"
+          aria-label={`add 1 more ${item.nombre}`}
         >
           <PlusIcon className="size-full" />
         </Button>

@@ -1,4 +1,4 @@
-describe("The login page", () => {
+describe("Login", () => {
   // user navigates to the login page
   beforeEach(() => {
     cy.visit('/auth/login')
@@ -6,43 +6,43 @@ describe("The login page", () => {
 
   describe("Basic flow", () => {
     it("displays the login form",  () => {
-        // the system shows the login form with email and password fields
-        cy.get("input[name=email]").should("exist")
-        cy.get("input[name=password]").should("exist")
-        cy.get("button[type=submit]").should("exist")
-      })
+      // the system shows the login form with email and password fields
+      cy.get("input[name=email]").should("exist")
+      cy.get("input[name=password]").should("exist")
+      cy.get("button[type=submit]").should("exist")
+    })
 
-      it("validates credencials against database and sets auth cookie when logging in via form submission", () => {
-        const email = "davidr@test.com"
-        const password = "test123"
-        
-        // the user enters valid credentials and submits the form
-        cy.get("input[name=email]").type(email)
-        cy.get("input[name=password]").type(`${password}{enter}`)
+    it("validates credencials against database and sets auth cookie when logging in via form submission", () => {
+      const email = "davidr@test.com"
+      const password = "test123"
+      
+      // the user enters valid credentials and submits the form
+      cy.get("input[name=email]").type(email)
+      cy.get("input[name=password]").type(`${password}{enter}`)
 
-        // if the credentials are valid, the system allows the user to log in and redirects to panel-de-control page
-        cy.url().should("include", "/panel-de-control")
-        cy.getCookie("token").should("exist")
-        cy.get("h1").should("contain", "Panel de control")
-      }) 
+      // if the credentials are valid, the system allows the user to log in and redirects to panel-de-control page
+      cy.url().should("include", "/panel-de-control")
+      cy.getCookie("token").should("exist")
+      cy.get("h1").should("contain", "Panel de control")
+    }) 
 
-      it("should display users and dashboard options when loggin in as admin", () => {
-        const adminEmail = "admin@test.com"
-        const adminPassword = "test123"
+    it("should display users and dashboard options when loggin in as admin", () => {
+      const adminEmail = "admin@test.com"
+      const adminPassword = "test123"
 
-        cy.get("input[name=email]").type(adminEmail)
-        cy.get("input[name=password]").type(`${adminPassword}{enter}`)
+      cy.get("input[name=email]").type(adminEmail)
+      cy.get("input[name=password]").type(`${adminPassword}{enter}`)
 
-        cy.url().should("include", "/panel-de-control")
-        cy.get("h1").should("contain", "Panel de control")
+      cy.url().should("include", "/panel-de-control")
+      cy.get("h1").should("contain", "Panel de control")
 
-        // if the user is an admin, the system displays the users and dashboard options as well as the admin role label
-        cy.get("p[class='text-gray-400 text-sm']").contains("Administrador")
-        cy.get("img[alt='ordenes']").should("exist")
-        cy.get("img[alt='usuarios']").should("exist")
-        cy.get("img[alt='crear-orden']").should("exist")
-        cy.get("img[alt='dashboard']").should("exist")
-      })
+      // if the user is an admin, the system displays the users and dashboard options as well as the admin role label
+      cy.get("p[class='text-gray-400 text-sm']").contains("Administrador")
+      cy.get("img[alt='ordenes']").should("exist")
+      cy.get("img[alt='usuarios']").should("exist")
+      cy.get("img[alt='crear-orden']").should("exist")
+      cy.get("img[alt='dashboard']").should("exist")
+    })
   })
 
   describe("Exceptional flow", () => {
