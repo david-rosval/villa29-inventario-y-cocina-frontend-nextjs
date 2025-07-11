@@ -108,7 +108,7 @@ describe("NuevaOrden Page", () => {
     fireEvent.click(enviarButton[0]);
 
     await waitFor(() => {
-      expect(screen.getByText(/No has seleccionado ningún item del menú/i)).toBeInTheDocument();
+      expect(screen.getByText(/No hay pedidos en la orden/i)).toBeInTheDocument();
     });
   });
 

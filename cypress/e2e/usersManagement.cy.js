@@ -28,7 +28,7 @@ describe("Users Management", () => {
       const updaterLastname = "UpdatedLastname"
       const updaterEmail = "updated@test.come"
       const updaterRole = "Cocinero"
-      cy.get('.\[\&_tr\:last-child\]\:border-0 > :nth-child(1) > :nth-child(1) > .peer')
+      cy.get("button[role='checkbox']").eq(1).click()
       cy.get("button[aria-label='Editar usuario']").click()
       cy.get("input[name=nombre]").clear().type(updaterName)
       cy.get("input[name=apellido]").clear().type(updaterLastname)
@@ -49,6 +49,11 @@ describe("Users Management", () => {
       })
       cy.get("button[aria-label='Eliminar usuario']").click()
     })
-    it("searches and filters users", () => {})
+    it("searches and filters users", () => {
+      cy.get("tbody tr").first().within(() => {
+        cy.get("input[type=checkbox]").check()
+      })
+      cy.get("button[aria-label='Buscar usuario']").click()
+    })
   })
 })
